@@ -1,0 +1,24 @@
+.beads/issues.jsonl
+  s_73d7af98936a03::t_5a76ba3a6cfcaf 1-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "a5b1e68da08625071c86d3e711889c96bd0a562d",
+  "prompts": {},
+  "humans": {
+    "h_6465a203f88bd5": {
+      "author": "larry <xspanni@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_73d7af98936a03": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_019363Dcm2xBPZ89DedoGBmy",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
