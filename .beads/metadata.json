@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "WarcraftDefender",
+  "project_id": "6490ad15-9919-48d9-a922-2920c78c1416"
+}
