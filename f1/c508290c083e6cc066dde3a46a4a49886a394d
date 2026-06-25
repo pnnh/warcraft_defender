@@ -1,0 +1,26 @@
+lib/game/components/effects/particle_effects.dart
+  s_f2f1a6bbaa3f14::t_ec4c3abe23ba48 13-17,20-23,26-29,43-44,46-52,76-77,79-84,86-91,120-121,123-131,139-159
+  s_f2f1a6bbaa3f14::t_36b20a2396d101 53-56
+  s_f2f1a6bbaa3f14::t_ceac03e0d1bf79 1-12,18-19,24-25,30-42,45,57-75,78,85,92-119,122,132-138,160-162
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "f1c508290c083e6cc066dde3a46a4a49886a394d",
+  "prompts": {},
+  "humans": {
+    "h_6465a203f88bd5": {
+      "author": "larry <xspanni@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_f2f1a6bbaa3f14": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01Jf6GH8AceDHLK1EHU3xNYW",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
