@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 
+import 'audio/audio_manager.dart';
 import 'components/grid/grid_board.dart';
 
 /// Main FlameGame entry point for Fort Guardian.
@@ -12,6 +13,8 @@ class FortGame extends FlameGame {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+    await AudioManager.instance.initialize();
+    await AudioManager.instance.onGameplayStart();
 
     final grid = GridBoard();
     grid.position = Vector2(
