@@ -1,0 +1,122 @@
+.beads/interactions.jsonl
+  s_052f4750e109b3::t_0de9528e6f8d96 1-5
+.gitignore
+  h_6465a203f88bd5 6-44
+.metadata
+  s_f1b71e9df1145c::t_a977aa25bd3927 1-33
+README.md
+  s_f1b71e9df1145c::t_84c7887ea06683 1-17
+analysis_options.yaml
+  s_f1b71e9df1145c::t_008e17e14c5f54 1-28
+android/.gitignore
+  s_f1b71e9df1145c::t_a1aee22286f53a 1-14
+android/app/build.gradle.kts
+  s_f1b71e9df1145c::t_cd18fc9ab95b84 1-45
+android/app/src/debug/AndroidManifest.xml
+  s_f1b71e9df1145c::t_7467b607ea11e9 1-7
+android/app/src/main/AndroidManifest.xml
+  s_f1b71e9df1145c::t_6a329247560be6 1-45
+android/app/src/main/kotlin/com/warcraftdefender/warcraft_defender/MainActivity.kt
+  s_f1b71e9df1145c::t_af770a18c12748 1-5
+android/app/src/main/res/drawable-v21/launch_background.xml
+  s_f1b71e9df1145c::t_3dcfb09469ff0b 1-12
+android/app/src/main/res/drawable/launch_background.xml
+  s_f1b71e9df1145c::t_317c28999e5cc3 1-12
+android/app/src/main/res/values-night/styles.xml
+  s_f1b71e9df1145c::t_eed06ec71743fa 1-18
+android/app/src/main/res/values/styles.xml
+  s_f1b71e9df1145c::t_0559493526b5b9 1-18
+android/app/src/profile/AndroidManifest.xml
+  s_f1b71e9df1145c::t_b1d6674a191c39 1-7
+android/build.gradle.kts
+  s_f1b71e9df1145c::t_bd6332e2cfea9b 1-24
+android/gradle.properties
+  s_f1b71e9df1145c::t_04076c6a4b874c 1-6
+android/gradle/wrapper/gradle-wrapper.properties
+  s_f1b71e9df1145c::t_c8cb9603b3e795 1-5
+android/settings.gradle.kts
+  s_f1b71e9df1145c::t_39ca31b7c8da37 1-26
+ios/.gitignore
+  s_f1b71e9df1145c::t_9f3f0f75880325 1-34
+ios/Flutter/AppFrameworkInfo.plist
+  s_f1b71e9df1145c::t_dcb3be2d94dace 1-24
+ios/Flutter/Debug.xcconfig
+  s_f1b71e9df1145c::t_79ce9df857acdb 1-2
+ios/Flutter/Release.xcconfig
+  s_f1b71e9df1145c::t_32ded2b6251ff4 1-2
+ios/Podfile
+  s_f1b71e9df1145c::t_da3b492000bf0a 1-43
+ios/Runner.xcodeproj/project.pbxproj
+  s_f1b71e9df1145c::t_4dddeb4c45fd5e 1-647
+ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+  s_f1b71e9df1145c::t_7cb8a371bbae9e 1-7
+ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+  s_f1b71e9df1145c::t_7662553594b37c 1-8
+ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+  s_f1b71e9df1145c::t_89d2482735c115 1-8
+ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme
+  s_f1b71e9df1145c::t_e9125433d3c9a4 1-119
+ios/Runner.xcworkspace/contents.xcworkspacedata
+  s_f1b71e9df1145c::t_64b5934b2a6718 1-7
+ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+  s_f1b71e9df1145c::t_6289b7c240dbc9 1-8
+ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+  s_f1b71e9df1145c::t_ac8c35d0c1769c 1-8
+ios/Runner/AppDelegate.swift
+  s_f1b71e9df1145c::t_d984a92eeb7b84 1-16
+ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json
+  s_f1b71e9df1145c::t_0da49d6912fdd7 1-122
+ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
+  s_f1b71e9df1145c::t_99625fd1c8dfa0 1-23
+ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md
+  s_f1b71e9df1145c::t_6a158fb12888fe 1-5
+ios/Runner/Base.lproj/LaunchScreen.storyboard
+  s_f1b71e9df1145c::t_0f93b8215eb718 1-37
+ios/Runner/Base.lproj/Main.storyboard
+  s_f1b71e9df1145c::t_ee1228a5c5b3a1 1-26
+ios/Runner/Info.plist
+  s_f1b71e9df1145c::t_701ef3fe1df016 1-70
+ios/Runner/Runner-Bridging-Header.h
+  s_f1b71e9df1145c::t_485a4121964c91 1
+ios/Runner/SceneDelegate.swift
+  s_f1b71e9df1145c::t_6ea06009e6645a 1-6
+ios/RunnerTests/RunnerTests.swift
+  s_f1b71e9df1145c::t_d11604e369de23 1-12
+lib/main.dart
+  s_f1b71e9df1145c::t_922c18d6c80018 1-20
+pubspec.lock
+  s_f1b71e9df1145c::t_5047c0d308e810 1-650
+test/widget_test.dart
+  s_f1b71e9df1145c::t_47c2475364190c 1-30
+warcraft.code-workspace
+  s_f1b71e9df1145c::t_b384879028b160 1-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "e54e9102d8d2f5172945b71025d202f1e60badc0",
+  "prompts": {},
+  "humans": {
+    "h_6465a203f88bd5": {
+      "author": "larry <xspanni@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_052f4750e109b3": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01AAcv5TdGTPFzpyjKSgvvn7",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_f1b71e9df1145c": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "1216775f-5c60-460f-8d4a-c5c16d601a5b",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
