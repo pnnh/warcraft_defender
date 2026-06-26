@@ -1,0 +1,24 @@
+lib/game/components/fort_component.dart
+  s_2a7b574014d56f::t_20cd678ea8f5a9 1-53
+assets/data/waves.json
+  s_2a7b574014d56f::t_20cd678ea8f5a9 1-99
+lib/game/systems/wave_manager.dart
+  s_2a7b574014d56f::t_924342589040b6 20,184-185,237-239,362-363
+  s_2a7b574014d56f::t_20cd678ea8f5a9 1-19,21-65,67-183,186-236,240-361,364-377,379-382
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "f6b599934b06e4dc3fd49b71d4b6e0197687974c",
+  "prompts": {},
+  "sessions": {
+    "s_2a7b574014d56f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01Qf8durcKt3ma5i4iVm6jct",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
