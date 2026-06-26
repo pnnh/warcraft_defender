@@ -1,0 +1,35 @@
+lib/game/pools/game_pools.dart
+  s_64486d8d655baf::t_292c04840fa0f4 1-62
+lib/utils/object_pool.dart
+  s_78e2a6689eb73f::t_9afe44b223ffb7 1-4,6-20,22-24,26,28-46,49-50,52-59
+lib/utils/component_pool.dart
+  s_64486d8d655baf::t_c35bef44144491 1-38
+lib/game/components/projectiles/base_projectile.dart
+  s_64486d8d655baf::t_2bbf7b6e27f0e1 27-28,120,129-137
+  s_64486d8d655baf::t_73bcf779e0d394 12
+  s_64486d8d655baf::t_cee988ffb4866b 138
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "cd52f77536c36f8a531e8543a781e423c8f8d123",
+  "prompts": {},
+  "sessions": {
+    "s_64486d8d655baf": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01DwW6tzQd8vXBfq7qoJvXTA",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_78e2a6689eb73f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01FWjQsatgHtLdZjDJKKXfEa",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
