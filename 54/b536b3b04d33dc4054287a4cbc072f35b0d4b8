@@ -1,0 +1,41 @@
+lib/game/components/grid/grid_cell.dart
+  s_14ec71b5382967::t_2927ef8eca452c 15,19-21,32-34,59-61,67,69,74-100,106-108
+lib/game/components/castle_wall_component.dart
+  s_14ec71b5382967::t_885cd705c44e82 1-166
+lib/game/fort_game.dart
+  s_14ec71b5382967::t_1732f13b1c84d2 182-185,188
+  s_14ec71b5382967::t_a7f753626ca3a5 49-69
+  s_14ec71b5382967::t_80f11fe7cfce6e 221,243
+  s_14ec71b5382967::t_9be7695dd7bd95 270,272,277
+lib/game/components/grid/grid_board.dart
+  s_14ec71b5382967::t_dfb8e401b23314 14-16,25,38-43,124
+lib/game/systems/wave_manager.dart
+  s_14ec71b5382967::t_341f0bd1a6c7f4 89
+  s_14ec71b5382967::t_3e5e3c5ce1a0b6 150-157
+  s_14ec71b5382967::t_4330c36b22ed44 14
+  s_14ec71b5382967::t_d4ec85a6f825bf 265-266
+  s_14ec71b5382967::t_bcd436408bbe63 318-320
+  s_14ec71b5382967::t_a6be31731e9c9c 343,345
+  s_14ec71b5382967::t_075d8b04216f2c 374-375,380-387
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "54b536b3b04d33dc4054287a4cbc072f35b0d4b8",
+  "prompts": {},
+  "humans": {
+    "h_6465a203f88bd5": {
+      "author": "larry <xspanni@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_14ec71b5382967": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "82437812-22ff-4c01-92c2-d1acd8892c79",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
