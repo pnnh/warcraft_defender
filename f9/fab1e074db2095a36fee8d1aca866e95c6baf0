@@ -1,0 +1,42 @@
+.beads/issues.jsonl
+  s_2a7b574014d56f::t_ffbf848b0fc69f 3-5
+  s_e0a7f5c41fca58::t_416bb5c6f060ec 14
+lib/game/components/towers/magic_tower.dart
+  s_63af4aa55c779b::t_3dacd69c7fba7c 9
+  s_63af4aa55c779b::t_48eea06478688f 6-8
+  s_63af4aa55c779b::t_cd63b1859d2d34 10-12
+lib/game/components/effects/merge_animation.dart
+  s_2a7b574014d56f::t_def87e2145e347 1-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "f9fab1e074db2095a36fee8d1aca866e95c6baf0",
+  "prompts": {},
+  "sessions": {
+    "s_2a7b574014d56f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01Qf8durcKt3ma5i4iVm6jct",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_63af4aa55c779b": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01S7tb4Yq4WNGbbrRQ633ZgA",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_e0a7f5c41fca58": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a9b51b44-0a53-4db6-a45e-d331f119a3c4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
