@@ -1,0 +1,25 @@
+lib/game/components/enemies/enemy_mover.dart
+  s_14ec71b5382967::t_aaec257569cb11 77-83
+  s_14ec71b5382967::t_e838a1870b2ff8 1-2,19-23
+  s_14ec71b5382967::t_982cf8cff61b31 24
+lib/game/systems/wave_manager.dart
+  s_14ec71b5382967::t_2b48c9fa10d072 87
+  s_14ec71b5382967::t_3c66dab3ac52be 257-258,264-268,271,273
+  s_14ec71b5382967::t_692ab82d2d4a6e 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "af8f2d96bcd7f662c33db9f2db01e918d165ae2b",
+  "prompts": {},
+  "sessions": {
+    "s_14ec71b5382967": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "82437812-22ff-4c01-92c2-d1acd8892c79",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
