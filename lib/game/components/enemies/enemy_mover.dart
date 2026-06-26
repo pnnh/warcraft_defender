@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flame/components.dart';
 
 import '../grid/grid_board.dart';
@@ -13,6 +15,12 @@ mixin EnemyMover on BaseEnemy {
   int? _occupancySignature;
 
   double distanceTraveled = 0;
+
+  // Natural walking wobble — each enemy gets its own random frequency, amplitude, and phase.
+  final double _wobbleFreq = 0.9 + math.Random().nextDouble() * 0.8;   // 0.9–1.7 cycles/s
+  final double _wobbleAmp = 0.15 + math.Random().nextDouble() * 0.12;  // 0.15–0.27 lateral fraction
+  final double _wobblePhase = math.Random().nextDouble() * math.pi * 2;
+  double _wobbleTimer = 0;
 
   @override
   void calculatePath() {
@@ -66,8 +74,13 @@ mixin EnemyMover on BaseEnemy {
       return;
     }
 
-    offset.normalize();
-    position += offset * step;
+    _wobbleTimer += dt;
+    final dir = offset / distance;
+    // Perpendicular direction (rotate 90°) for lateral sway.
+    final perp = Vector2(-dir.y, dir.x);
+    final sway = math.sin(_wobbleTimer * _wobbleFreq * math.pi * 2 + _wobblePhase) * _wobbleAmp;
+    final wobblyDir = (dir + perp * sway)..normalize();
+    position += wobblyDir * step;
     distanceTraveled += step;
   }
 

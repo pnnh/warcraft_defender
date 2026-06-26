@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math' as math;
 
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
@@ -83,6 +84,7 @@ class WaveManager extends Component {
   final List<WaveConfig> _waves = <WaveConfig>[];
   final List<_PendingSpawn> _pendingSpawns = <_PendingSpawn>[];
   final Map<BaseEnemy, String> _trackedEnemies = <BaseEnemy, String>{};
+  final math.Random _rng = math.Random();
 
   FortComponent? _fortComponent;
 
@@ -252,21 +254,23 @@ class WaveManager extends Component {
 
     final board = gridBoard;
     if (board != null) {
-      // Portrait: enemies enter top-center, exit bottom-center.
-      final entryRow = 0;
-      final entryCol = board.cols ~/ 2;
+      // Pick a random column so enemies spread across the top edge.
+      final entryCol = _rng.nextInt(board.cols);
       final fortRow = board.rows - 1;
       final fortCol = board.cols ~/ 2;
       final stride = board.cellSize + board.gap;
       final inset = (board.cellSize - enemy.size.x) / 2;
 
+      // Spawn above the visible grid so the enemy walks in from off-screen.
+      final spawnX = board.position.x + entryCol * stride + inset +
+          (_rng.nextDouble() - 0.5) * stride * 0.5;
+      final spawnY = board.position.y - enemy.size.y - 10 - _rng.nextDouble() * 30;
+
       enemy
         ..gridBoard = board
-        ..entryCell = (entryRow, entryCol)
+        ..entryCell = (0, entryCol)
         ..fortCell = (fortRow, fortCol)
-        ..position =
-            board.position +
-            Vector2(entryCol * stride + inset, entryRow * stride + inset);
+        ..position = Vector2(spawnX, spawnY);
       enemy.calculatePath();
     }
 
