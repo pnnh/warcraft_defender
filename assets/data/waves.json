@@ -1,99 +1,24 @@
 {
   "waves": [
-    {
-      "wave": 1,
-      "enemies": [
-        {
-          "type": "goblin",
-          "count": 5,
-          "interval": 1.5,
-          "health_mult": 1.0,
-          "speed_mult": 1.0
-        }
-      ]
-    },
-    {
-      "wave": 2,
-      "enemies": [
-        {
-          "type": "goblin",
-          "count": 8,
-          "interval": 1.2,
-          "health_mult": 1.2,
-          "speed_mult": 1.1
-        },
-        {
-          "type": "orc",
-          "count": 2,
-          "interval": 3.0,
-          "health_mult": 1.0,
-          "speed_mult": 1.0
-        }
-      ]
-    },
-    {
-      "wave": 3,
-      "enemies": [
-        {
-          "type": "goblin",
-          "count": 10,
-          "interval": 1.0,
-          "health_mult": 1.5,
-          "speed_mult": 1.2
-        },
-        {
-          "type": "orc",
-          "count": 4,
-          "interval": 2.0,
-          "health_mult": 1.2,
-          "speed_mult": 1.0
-        },
-        {
-          "type": "troll",
-          "count": 1,
-          "interval": 5.0,
-          "health_mult": 1.0,
-          "speed_mult": 0.8
-        }
-      ]
-    },
-    {
-      "wave": 4,
-      "enemies": [
-        {
-          "type": "goblin",
-          "count": 12,
-          "interval": 0.8,
-          "health_mult": 1.8,
-          "speed_mult": 1.3
-        },
-        {
-          "type": "dark_knight",
-          "count": 3,
-          "interval": 2.5,
-          "health_mult": 1.0,
-          "speed_mult": 1.0
-        }
-      ]
-    },
-    {
-      "wave": 5,
-      "enemies": [
-        {
-          "type": "orc",
-          "count": 8,
-          "interval": 1.5,
-          "health_mult": 2.0,
-          "speed_mult": 1.2
-        },
-        {
-          "type": "boss_dragon",
-          "count": 1,
-          "interval": 10.0,
-          "health_mult": 1.0,
-          "speed_mult": 0.6
-        }
-      ]
-    }
+    {"wave":1,"enemies":[{"type":"goblin","count":5,"interval":1.5,"health_mult":1.0,"speed_mult":1.0}]},
+    {"wave":2,"enemies":[{"type":"goblin","count":8,"interval":1.2,"health_mult":1.2,"speed_mult":1.1},{"type":"orc","count":2,"interval":3.0,"health_mult":1.0,"speed_mult":1.0}]},
+    {"wave":3,"enemies":[{"type":"goblin","count":10,"interval":1.0,"health_mult":1.5,"speed_mult":1.2},{"type":"orc","count":4,"interval":2.0,"health_mult":1.2,"speed_mult":1.0},{"type":"troll","count":1,"interval":5.0,"health_mult":1.0,"speed_mult":0.8}]},
+    {"wave":4,"enemies":[{"type":"goblin","count":12,"interval":0.8,"health_mult":1.8,"speed_mult":1.3},{"type":"dark_knight","count":3,"interval":2.5,"health_mult":1.0,"speed_mult":1.0}]},
+    {"wave":5,"boss":true,"enemies":[{"type":"orc","count":8,"interval":1.5,"health_mult":2.0,"speed_mult":1.2},{"type":"boss_dragon","count":1,"interval":10.0,"health_mult":1.0,"speed_mult":0.6}]},
+    {"wave":6,"enemies":[{"type":"goblin","count":14,"interval":0.7,"health_mult":2.2,"speed_mult":1.4},{"type":"troll","count":2,"interval":4.0,"health_mult":1.3,"speed_mult":0.9}]},
+    {"wave":7,"enemies":[{"type":"orc","count":10,"interval":1.2,"health_mult":2.5,"speed_mult":1.3},{"type":"dark_knight","count":4,"interval":2.0,"health_mult":1.5,"speed_mult":1.1}]},
+    {"wave":8,"enemies":[{"type":"goblin","count":20,"interval":0.5,"health_mult":2.8,"speed_mult":1.5},{"type":"troll","count":3,"interval":3.0,"health_mult":1.5,"speed_mult":1.0}]},
+    {"wave":9,"enemies":[{"type":"dark_knight","count":8,"interval":1.5,"health_mult":2.0,"speed_mult":1.2},{"type":"orc","count":6,"interval":1.8,"health_mult":2.5,"speed_mult":1.2}]},
+    {"wave":10,"boss":true,"enemies":[{"type":"troll","count":5,"interval":2.5,"health_mult":2.5,"speed_mult":1.0},{"type":"dark_knight","count":5,"interval":2.0,"health_mult":2.0,"speed_mult":1.2},{"type":"boss_dragon","count":1,"interval":15.0,"health_mult":2.0,"speed_mult":0.7}]},
+    {"wave":11,"enemies":[{"type":"goblin","count":25,"interval":0.4,"health_mult":3.2,"speed_mult":1.6},{"type":"orc","count":8,"interval":1.5,"health_mult":3.0,"speed_mult":1.3}]},
+    {"wave":12,"enemies":[{"type":"troll","count":6,"interval":2.0,"health_mult":2.8,"speed_mult":1.1},{"type":"dark_knight","count":6,"interval":1.8,"health_mult":2.5,"speed_mult":1.3}]},
+    {"wave":13,"enemies":[{"type":"goblin","count":30,"interval":0.3,"health_mult":3.5,"speed_mult":1.7},{"type":"orc","count":10,"interval":1.2,"health_mult":3.2,"speed_mult":1.4},{"type":"troll","count":2,"interval":4.0,"health_mult":2.5,"speed_mult":1.0}]},
+    {"wave":14,"enemies":[{"type":"dark_knight","count":12,"interval":1.2,"health_mult":3.0,"speed_mult":1.4},{"type":"troll","count":4,"interval":3.0,"health_mult":3.0,"speed_mult":1.1}]},
+    {"wave":15,"boss":true,"enemies":[{"type":"goblin","count":20,"interval":0.4,"health_mult":4.0,"speed_mult":1.8},{"type":"orc","count":10,"interval":1.0,"health_mult":3.5,"speed_mult":1.4},{"type":"dark_knight","count":8,"interval":1.5,"health_mult":3.0,"speed_mult":1.3},{"type":"boss_dragon","count":2,"interval":20.0,"health_mult":2.5,"speed_mult":0.8}]},
+    {"wave":16,"enemies":[{"type":"troll","count":10,"interval":1.5,"health_mult":3.5,"speed_mult":1.2},{"type":"dark_knight","count":10,"interval":1.5,"health_mult":3.5,"speed_mult":1.4}]},
+    {"wave":17,"enemies":[{"type":"goblin","count":35,"interval":0.25,"health_mult":4.5,"speed_mult":2.0},{"type":"orc","count":12,"interval":1.0,"health_mult":4.0,"speed_mult":1.5}]},
+    {"wave":18,"enemies":[{"type":"troll","count":8,"interval":2.0,"health_mult":4.5,"speed_mult":1.3},{"type":"dark_knight","count":12,"interval":1.2,"health_mult":4.0,"speed_mult":1.5},{"type":"orc","count":8,"interval":1.5,"health_mult":4.0,"speed_mult":1.4}]},
+    {"wave":19,"enemies":[{"type":"goblin","count":40,"interval":0.2,"health_mult":5.0,"speed_mult":2.2},{"type":"troll","count":10,"interval":1.8,"health_mult":5.0,"speed_mult":1.4},{"type":"dark_knight","count":15,"interval":1.0,"health_mult":4.5,"speed_mult":1.5}]},
+    {"wave":20,"boss":true,"enemies":[{"type":"goblin","count":30,"interval":0.2,"health_mult":5.5,"speed_mult":2.0},{"type":"orc","count":15,"interval":0.8,"health_mult":5.0,"speed_mult":1.5},{"type":"troll","count":10,"interval":1.5,"health_mult":5.5,"speed_mult":1.3},{"type":"dark_knight","count":10,"interval":1.2,"health_mult":5.0,"speed_mult":1.5},{"type":"boss_dragon","count":3,"interval":25.0,"health_mult":4.0,"speed_mult":0.9}]}
   ]
 }
