@@ -1,0 +1,51 @@
+lib/game/components/enemies/boss_dragon_enemy.dart
+  s_14ec71b5382967::t_42d9178d53d46f 52
+  s_14ec71b5382967::t_56b39e98632a76 10
+lib/game/components/units/mage_unit.dart
+  s_14ec71b5382967::t_d3c245b35b036f 19
+lib/game/systems/wave_manager.dart
+  s_14ec71b5382967::t_ee63d4fd3b2189 67
+lib/game/components/units/archer_unit.dart
+  s_14ec71b5382967::t_0611514c42f6b8 19
+lib/game/components/units/sword_unit.dart
+  s_14ec71b5382967::t_e7ddf2b7a87f25 18
+lib/game/components/units/base_unit.dart
+  s_14ec71b5382967::t_9511eb5e7a9025 127
+lib/game/components/enemies/orc_enemy.dart
+  s_14ec71b5382967::t_d91fbb809f28b1 9
+  s_14ec71b5382967::t_e6bf5296be255c 41
+lib/game/fort_game.dart
+  s_14ec71b5382967::t_2e8ce6041a0943 45
+lib/game/components/enemies/goblin_enemy.dart
+  s_14ec71b5382967::t_e7e9cfb23c9fc5 34
+  s_14ec71b5382967::t_d51a02a9f9804a 9
+lib/game/game_state.dart
+  h_6465a203f88bd5 9-10
+lib/game/components/enemies/troll_enemy.dart
+  s_14ec71b5382967::t_2a9a380325e2dc 9
+  s_14ec71b5382967::t_5399fb7c959ea5 39
+lib/game/components/enemies/dark_knight_enemy.dart
+  s_14ec71b5382967::t_a4bb2d3341c3cd 9
+  s_14ec71b5382967::t_57ec0c9dcb744d 39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "802e614b613b67dd4ec67941140d7c0e7a9c7c24",
+  "prompts": {},
+  "humans": {
+    "h_6465a203f88bd5": {
+      "author": "larry <xspanni@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_14ec71b5382967": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "82437812-22ff-4c01-92c2-d1acd8892c79",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
