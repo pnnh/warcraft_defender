@@ -205,6 +205,7 @@ class FortGame extends FlameGame with HasTimeScale {
       _placeTower(targetCell, entry);
       gold -= dragPlacement.entry.cost;
       _syncGoldState();
+      AudioManager.instance.playTowerPlace();
     }
 
     _clearDragPlacement();
