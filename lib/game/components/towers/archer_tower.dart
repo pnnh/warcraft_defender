@@ -4,6 +4,8 @@ import 'package:flame/components.dart';
 
 import '../enemies/base_enemy.dart';
 import '../projectiles/arrow_projectile.dart';
+import '../units/base_unit.dart';
+import '../units/archer_unit.dart';
 import 'base_tower.dart';
 
 class ArcherTower extends BaseTower {
@@ -49,4 +51,8 @@ class ArcherTower extends BaseTower {
       parent?.add(arrow);
     }
   }
+
+  @override
+  BaseUnit? createUnit(EnemyQueryCallback getEnemies) =>
+      ArcherUnit(getEnemies: getEnemies);
 }

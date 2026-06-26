@@ -73,6 +73,7 @@ flutter:
     - assets/images/sprites/enemies/
     - assets/images/sprites/effects/
     - assets/images/sprites/ui/
+    - assets/images/sprites/units/
     - assets/images/tilemaps/
     - assets/audio/sfx/
     - assets/audio/bgm/

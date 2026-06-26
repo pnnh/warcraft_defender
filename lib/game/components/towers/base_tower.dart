@@ -2,6 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 
 import '../enemies/base_enemy.dart';
+import '../units/base_unit.dart';
 import '../../systems/skill_system.dart';
 
 /// Base class for all tower types.
@@ -37,6 +38,13 @@ abstract class BaseTower extends PositionComponent implements SkillTarget {
   double slowEffectStrength = 0.0;
   @override
   double splashDamageMultiplier = 0.0;
+
+  /// Set by FortGame when the tower is placed so spawned units can find enemies.
+  EnemyQueryCallback? getEnemies;
+
+  /// Interval (seconds) between unit spawns. Override in subclasses.
+  double get spawnInterval => 8.0;
+  double _spawnTimer = 0;
 
   /// Loaded sprite for this tower (null = fall back to geometry rendering).
   Sprite? sprite;
@@ -84,6 +92,20 @@ abstract class BaseTower extends PositionComponent implements SkillTarget {
       _fireAt(_currentTarget!);
       _cooldownRemaining = attackCooldown;
     }
+
+    // Unit spawning.
+    final cb = getEnemies;
+    if (cb != null) {
+      _spawnTimer += dt;
+      if (_spawnTimer >= spawnInterval) {
+        _spawnTimer = 0;
+        final unit = createUnit(cb);
+        if (unit != null) {
+          unit.position = absoluteCenter.clone();
+          parent?.add(unit);
+        }
+      }
+    }
   }
 
   BaseEnemy? _acquireTarget() {
@@ -116,4 +138,8 @@ abstract class BaseTower extends PositionComponent implements SkillTarget {
 
   /// Override in subclasses to apply damage, spawn projectiles, and animate.
   void onFire(BaseEnemy target);
+
+  /// Override in subclasses to return the unit type this tower produces.
+  /// Return null if the tower does not spawn units.
+  BaseUnit? createUnit(EnemyQueryCallback getEnemies) => null;
 }

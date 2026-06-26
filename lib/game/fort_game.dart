@@ -273,7 +273,8 @@ class FortGame extends FlameGame with HasTimeScale {
     final tower = _createTowerForEntry(entry)
       ..size = Vector2.all(towerSize)
       ..position =
-          cell.position + Vector2.all((_grid.cellSize - towerSize) / 2);
+          cell.position + Vector2.all((_grid.cellSize - towerSize) / 2)
+      ..getEnemies = () => _waveManager.activeEnemies;
 
     cell.occupyingTower = tower;
     _grid.add(tower);

@@ -90,6 +90,10 @@ class WaveManager extends Component {
   bool get gameOver => _gameOver;
   bool get waveActive => _waveActive;
 
+  /// Returns all currently-alive tracked enemies. Used by units to find targets.
+  List<BaseEnemy> get activeEnemies =>
+      _trackedEnemies.keys.where((e) => e.isAlive).toList(growable: false);
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();

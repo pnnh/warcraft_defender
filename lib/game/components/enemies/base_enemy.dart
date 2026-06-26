@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
+import 'package:flame/sprite.dart';
 
 import '../grid/grid_board.dart';
 
@@ -18,28 +19,77 @@ abstract class BaseEnemy extends PositionComponent {
   (int, int)? entryCell;
   (int, int)? fortCell;
 
-  /// Sprite shown while the enemy is alive and walking.
-  Sprite? walkSprite;
+  /// Stateful ticker for the walk animation.
+  SpriteAnimationTicker? _walkTicker;
 
-  /// Sprite shown for a brief moment on death before removal.
-  Sprite? deathSprite;
+  /// Stateful ticker for the death animation.
+  SpriteAnimationTicker? _deathTicker;
 
   /// Subclasses provide the base filename prefix, e.g. 'goblin'.
   String get spriteKey;
 
+  /// Sprite sheet column count for walk animation. Override per-enemy if different.
+  int get walkCols => 3;
+
+  /// Sprite sheet row count for walk animation. Override per-enemy if different.
+  int get walkRows => 3;
+
+  /// The current animated walk sprite (null while asset is loading or missing).
+  Sprite? get currentWalkSprite => _walkTicker?.getSprite();
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+    final walkAnim = await _loadSheetAnimation(
+      '${spriteKey}_walk.png',
+      cols: walkCols,
+      rows: walkRows,
+      stepTime: 0.12,
+      loop: true,
+    );
+    _walkTicker = walkAnim?.createTicker();
+
+    final deathAnim = await _loadSheetAnimation(
+      '${spriteKey}_death.png',
+      cols: walkCols,
+      rows: 1,
+      stepTime: 0.10,
+      loop: false,
+    );
+    _deathTicker = deathAnim?.createTicker();
+  }
+
+  Future<SpriteAnimation?> _loadSheetAnimation(
+    String filename, {
+    required int cols,
+    required int rows,
+    required double stepTime,
+    bool loop = true,
+  }) async {
     try {
-      final walkImg =
-          await Flame.images.load('sprites/enemies/${spriteKey}_walk.png');
-      walkSprite = Sprite(walkImg);
-    } catch (_) {}
-    try {
-      final deathImg =
-          await Flame.images.load('sprites/enemies/${spriteKey}_death.png');
-      deathSprite = Sprite(deathImg);
-    } catch (_) {}
+      final img = await Flame.images.load('sprites/enemies/$filename');
+      final fw = img.width / cols;
+      final fh = img.height / rows;
+      final sheet = SpriteSheet(
+        image: img,
+        srcSize: Vector2(fw.toDouble(), fh.toDouble()),
+      );
+      final frames = <SpriteAnimationFrame>[
+        for (var r = 0; r < rows; r++)
+          for (var c = 0; c < cols; c++)
+            SpriteAnimationFrame(sheet.getSprite(r, c), stepTime),
+      ];
+      return SpriteAnimation(frames, loop: loop);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    _walkTicker?.update(dt);
+    _deathTicker?.update(dt);
   }
 
   /// Called after entryCell/fortCell/gridBoard are set to calculate the path.

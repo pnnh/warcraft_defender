@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 
 import '../enemies/base_enemy.dart';
+import '../units/base_unit.dart';
+import '../units/mage_unit.dart';
 import 'base_tower.dart';
 
 class MagicTower extends BaseTower {
@@ -80,4 +82,8 @@ class MagicTower extends BaseTower {
       );
     }
   }
+
+  @override
+  BaseUnit? createUnit(EnemyQueryCallback getEnemies) =>
+      MageUnit(getEnemies: getEnemies);
 }

@@ -4,6 +4,8 @@ import 'package:flame/components.dart';
 
 import '../enemies/base_enemy.dart';
 import '../projectiles/cannonball_projectile.dart';
+import '../units/base_unit.dart';
+import '../units/sword_unit.dart';
 import 'base_tower.dart';
 
 class CannonTower extends BaseTower {
@@ -68,4 +70,8 @@ class CannonTower extends BaseTower {
       barrelPaint,
     );
   }
+
+  @override
+  BaseUnit? createUnit(EnemyQueryCallback getEnemies) =>
+      SwordUnit(getEnemies: getEnemies);
 }

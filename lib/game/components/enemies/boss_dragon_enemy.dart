@@ -27,7 +27,7 @@ class BossDragonEnemy extends BaseEnemy with EnemyMover {
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-    final s = walkSprite;
+    final s = currentWalkSprite;
     if (s != null) {
       s.render(canvas, size: size);
     } else {
