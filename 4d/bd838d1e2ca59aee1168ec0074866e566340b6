@@ -1,0 +1,70 @@
+lib/game/components/enemies/enemy_mover.dart
+  s_14ec71b5382967::t_2ac5d4f9b3a0a1 41-42
+lib/ui/screens/game_screen.dart
+  s_14ec71b5382967::t_c0ae052d04235c 3
+  s_14ec71b5382967::t_7900607dddb8c8 73
+  s_14ec71b5382967::t_b6ff9830258d9b 59-72,74-93,96-117,119-131
+lib/game/game_state.dart
+  s_14ec71b5382967::t_0d1a17a246207d 54-58
+  s_14ec71b5382967::t_d2ee51d915c014 13,20
+lib/game/components/enemies/troll_enemy.dart
+  s_14ec71b5382967::t_0168af810e6002 18-23
+lib/game/components/enemies/base_enemy.dart
+  s_14ec71b5382967::t_6cebaffd68c64d 17-29
+  s_14ec71b5382967::t_86602d3f514f76 106-116
+lib/game/components/fort_component.dart
+  s_14ec71b5382967::t_a44f42ba569503 6-8,19-25
+  s_14ec71b5382967::t_9eb991bc3c7b8c 49-74
+  s_14ec71b5382967::t_c082391784f8b1 26
+lib/game/systems/wave_manager.dart
+  s_14ec71b5382967::t_1c131b838ab883 251
+  s_14ec71b5382967::t_037c439893907c 285-287,291,303-321,323
+  s_14ec71b5382967::t_2b1fd197e362ed 356
+  s_14ec71b5382967::t_96cfde5887d3f3 148-150
+  s_14ec71b5382967::t_17538941e40cc1 322
+  s_14ec71b5382967::t_7c34b44f7f730c 324
+docs/DESIGN.md
+  h_6465a203f88bd5 1-200
+lib/ui/screens/game_over_screen.dart
+  s_14ec71b5382967::t_8741671196fb49 54-58
+  s_14ec71b5382967::t_088faf5fc1660f 8,15
+  s_14ec71b5382967::t_b71921b8f33d5c 53
+lib/game/components/enemies/dark_knight_enemy.dart
+  s_14ec71b5382967::t_1908391933b8ec 18-23
+lib/game/components/enemies/boss_dragon_enemy.dart
+  s_14ec71b5382967::t_fd3842f97c23ec 20-25
+lib/main.dart
+  s_14ec71b5382967::t_f91c27949e1915 1,12-18
+lib/game/components/enemies/goblin_enemy.dart
+  s_14ec71b5382967::t_b9fdb697f5ad44 19-20
+  s_14ec71b5382967::t_0acee11ebb777e 18
+lib/game/components/enemies/orc_enemy.dart
+  s_14ec71b5382967::t_a4e910af8441bc 18-23
+lib/game/audio/audio_manager.dart
+  s_14ec71b5382967::t_1a89d358d82284 66
+  s_14ec71b5382967::t_cdf69fd919f14c 2,13-15
+  s_14ec71b5382967::t_62704f3c585e34 38-57,61-65,67-68,72-92
+  s_14ec71b5382967::t_461e9fad31cf3f 96-99,103-107,109-113
+  s_14ec71b5382967::t_c0ea5466754ad1 129-131
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "4dbd838d1e2ca59aee1168ec0074866e566340b6",
+  "prompts": {},
+  "humans": {
+    "h_6465a203f88bd5": {
+      "author": "larry <xspanni@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_14ec71b5382967": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "82437812-22ff-4c01-92c2-d1acd8892c79",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
