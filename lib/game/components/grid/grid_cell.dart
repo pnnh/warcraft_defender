@@ -16,6 +16,10 @@ class GridCell extends PositionComponent with TapCallbacks {
   static const Color _emptyBorderColor = Color(0xFF555555);
   static const Color _occupiedFillColor = Color(0xFF1A3A1A);
   static const Color _occupiedBorderColor = Color(0xFF44AA44);
+  static const Color _ghostValidFillColor = Color(0x6633D1FF);
+  static const Color _ghostValidBorderColor = Color(0xFF7FE7FF);
+  static const Color _ghostInvalidFillColor = Color(0x66FF5A5A);
+  static const Color _ghostInvalidBorderColor = Color(0xFFFF9B9B);
 
   final int row;
   final int col;
@@ -23,6 +27,8 @@ class GridCell extends PositionComponent with TapCallbacks {
   final void Function(GridCell)? onTap;
 
   bool isOccupied = false;
+  bool isGhosted = false;
+  bool isGhostValid = true;
 
   @override
   void render(Canvas canvas) {
@@ -39,6 +45,20 @@ class GridCell extends PositionComponent with TapCallbacks {
 
     canvas.drawRect(rect, fillPaint);
     canvas.drawRect(rect, borderPaint);
+
+    if (isGhosted) {
+      final ghostFillPaint = Paint()
+        ..color = isGhostValid ? _ghostValidFillColor : _ghostInvalidFillColor
+        ..style = PaintingStyle.fill;
+      final ghostBorderPaint = Paint()
+        ..color =
+            isGhostValid ? _ghostValidBorderColor : _ghostInvalidBorderColor
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 3;
+
+      canvas.drawRect(rect, ghostFillPaint);
+      canvas.drawRect(rect, ghostBorderPaint);
+    }
   }
 
   @override
