@@ -1,0 +1,34 @@
+lib/main.dart
+  s_15d3d4058eab63::t_439ca86fa54efa 4,12-16
+lib/ui/widgets/skill_select_overlay.dart
+  s_15d3d4058eab63::t_439ca86fa54efa 1-2,5,8,18-26,29-33,62,68-83,90-134
+  s_15d3d4058eab63::t_45961b9e42c865 63-66
+pubspec.yaml
+  s_15d3d4058eab63::t_439ca86fa54efa 48
+ios/Runner/Info.plist
+  s_15d3d4058eab63::t_439ca86fa54efa 27-28
+lib/ui/screens/game_over_screen.dart
+  s_15d3d4058eab63::t_439ca86fa54efa 1-2,5-7,21-33,70,74-78,87,96
+android/app/src/main/AndroidManifest.xml
+  s_15d3d4058eab63::t_439ca86fa54efa 6-8
+lib/ads/ads_manager.dart
+  s_15d3d4058eab63::t_439ca86fa54efa 1-199
+pubspec.lock
+  s_15d3d4058eab63::t_4894d0000aaae4 223,226
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "f2e8e5bb0cce350c9ee6b77d304ad4e48d63c43f",
+  "prompts": {},
+  "sessions": {
+    "s_15d3d4058eab63": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01CSRmnET4DfBkL6zmrUPG3N",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
