@@ -1,0 +1,33 @@
+assets/data/waves.json
+  s_e0a7f5c41fca58::t_f012ef442eb53a 3-22
+.beads/interactions.jsonl
+  s_63af4aa55c779b::t_9ce0fd52de751f 12-15
+  s_e0a7f5c41fca58::t_084d5d22b54e71 16
+.beads/issues.jsonl
+  s_63af4aa55c779b::t_9ce0fd52de751f 3-5,13-14
+  s_e0a7f5c41fca58::t_5f807a5a9a0903 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "804d0247da4c12cb736b496e1ef2c1062268bc0f",
+  "prompts": {},
+  "sessions": {
+    "s_63af4aa55c779b": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01S7tb4Yq4WNGbbrRQ633ZgA",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_e0a7f5c41fca58": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a9b51b44-0a53-4db6-a45e-d331f119a3c4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
