@@ -1,10 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
-import '../../ads/ads_manager.dart';
-
-class GameOverScreen extends StatefulWidget {
+class GameOverScreen extends StatelessWidget {
   const GameOverScreen({
     super.key,
     required this.wavesReached,
@@ -17,19 +13,6 @@ class GameOverScreen extends StatefulWidget {
   final int goldEarned;
   final VoidCallback onRetry;
   final VoidCallback onMenu;
-
-  @override
-  State<GameOverScreen> createState() => _GameOverScreenState();
-}
-
-class _GameOverScreenState extends State<GameOverScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      unawaited(AdsManager.instance.showInterstitial());
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,13 +50,13 @@ class _GameOverScreenState extends State<GameOverScreen> {
               const SizedBox(height: 20),
               _StatRow(
                 label: 'Waves Survived',
-                value: '${widget.wavesReached}',
+                value: '$wavesReached',
                 icon: '🌊',
               ),
               const SizedBox(height: 8),
               _StatRow(
                 label: 'Gold Earned',
-                value: '${widget.goldEarned}',
+                value: '$goldEarned',
                 icon: '💰',
               ),
               const SizedBox(height: 28),
@@ -84,7 +67,7 @@ class _GameOverScreenState extends State<GameOverScreen> {
                       label: '🔄 Retry',
                       color: const Color(0xFF004400),
                       borderColor: Colors.green,
-                      onTap: widget.onRetry,
+                      onTap: onRetry,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -93,7 +76,7 @@ class _GameOverScreenState extends State<GameOverScreen> {
                       label: '🏠 Menu',
                       color: const Color(0xFF000044),
                       borderColor: Colors.blue,
-                      onTap: widget.onMenu,
+                      onTap: onMenu,
                     ),
                   ),
                 ],

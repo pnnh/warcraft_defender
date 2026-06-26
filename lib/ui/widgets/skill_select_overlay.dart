@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
-import '../../ads/ads_manager.dart';
 import '../../game/systems/skill_system.dart';
 
 class SkillSelectOverlay extends StatefulWidget {
@@ -20,17 +17,8 @@ class SkillSelectOverlay extends StatefulWidget {
 }
 
 class _SkillSelectOverlayState extends State<SkillSelectOverlay> {
-  late final List<Skill> _options = List<Skill>.of(widget.options);
-  bool _rewardConsumed = false;
-  bool _showingRewardedAd = false;
-
   @override
   Widget build(BuildContext context) {
-    final canWatchAd =
-        !_rewardConsumed &&
-        !_showingRewardedAd &&
-        AdsManager.instance.isRewardedReady;
-
     return Material(
       color: Colors.black54,
       child: Center(
@@ -59,78 +47,17 @@ class _SkillSelectOverlayState extends State<SkillSelectOverlay> {
                 style: TextStyle(color: Colors.white70, fontSize: 14),
               ),
               const SizedBox(height: 20),
-              ..._options.map(
+              ...widget.options.map(
                 (skill) => _SkillCard(
                   skill: skill,
                   onTap: () => widget.onSelected(skill),
                 ),
               ),
-              if (canWatchAd) ...[
-                const SizedBox(height: 8),
-                OutlinedButton.icon(
-                  onPressed: _watchAdForExtraChoice,
-                  icon: const Text('📺'),
-                  label: const Text('Watch Ad for Extra Choice'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFFFFD700),
-                    side: const BorderSide(color: Color(0xFFFFD700)),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                  ),
-                ),
-              ],
             ],
           ),
         ),
       ),
     );
-  }
-
-  Future<void> _watchAdForExtraChoice() async {
-    if (_rewardConsumed || _showingRewardedAd) {
-      return;
-    }
-
-    setState(() {
-      _showingRewardedAd = true;
-    });
-
-    try {
-      await AdsManager.instance.showRewarded(
-        onEarned: (_) {
-          final extraSkill = _drawExtraSkill();
-          if (extraSkill == null || !mounted) {
-            return;
-          }
-          setState(() {
-            _options.add(extraSkill);
-            _rewardConsumed = true;
-          });
-        },
-      );
-    } finally {
-      if (mounted) {
-        setState(() {
-          _showingRewardedAd = false;
-        });
-      }
-    }
-  }
-
-  Skill? _drawExtraSkill() {
-    final excludedIds = _options.map((skill) => skill.id).toSet();
-    final candidates = SkillSystem.instance
-        .drawOptions(count: SkillSystem.allSkills.length)
-        .where((skill) => !excludedIds.contains(skill.id))
-        .toList();
-
-    if (candidates.isEmpty) {
-      return null;
-    }
-
-    return candidates[Random().nextInt(candidates.length)];
   }
 }
 
