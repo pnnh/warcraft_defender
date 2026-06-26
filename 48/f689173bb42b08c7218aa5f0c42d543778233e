@@ -1,0 +1,31 @@
+.beads/issues.jsonl
+  s_e5092a3520599d::t_01a3cab4700939 27
+  s_e0a7f5c41fca58::t_2605ab3c717ccd 2,12,16,21,26
+lib/game/systems/merge_system.dart
+  s_e0a7f5c41fca58::t_8967d13bab6749 3
+  s_e0a7f5c41fca58::t_c9215323503126 55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "48f689173bb42b08c7218aa5f0c42d543778233e",
+  "prompts": {},
+  "sessions": {
+    "s_e0a7f5c41fca58": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a9b51b44-0a53-4db6-a45e-d331f119a3c4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_e5092a3520599d": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_019uuA9NACKYsiVatCbRbRr4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
