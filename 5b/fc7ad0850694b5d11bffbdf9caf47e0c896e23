@@ -1,0 +1,35 @@
+lib/game/components/effects/merge_animation.dart
+  s_2a7b574014d56f::t_def87e2145e347 1-50
+lib/game/components/towers/magic_tower.dart
+  s_63af4aa55c779b::t_3dacd69c7fba7c 9
+  s_63af4aa55c779b::t_48eea06478688f 6-8
+  s_63af4aa55c779b::t_ac7565d6275056 3-5
+  s_63af4aa55c779b::t_cd63b1859d2d34 10-12
+  s_63af4aa55c779b::t_337d52563c6272 13-15
+  s_63af4aa55c779b::t_2945bc83606ad8 1-2
+  s_63af4aa55c779b::t_f32c6c85a9ec00 16-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "5bfc7ad0850694b5d11bffbdf9caf47e0c896e23",
+  "prompts": {},
+  "sessions": {
+    "s_2a7b574014d56f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01Qf8durcKt3ma5i4iVm6jct",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_63af4aa55c779b": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01S7tb4Yq4WNGbbrRQ633ZgA",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
