@@ -91,12 +91,13 @@ mixin EnemyMover on BaseEnemy {
     return null;
   }
 
+  // Portrait mode: enemies enter from the top-center, exit at the bottom-center.
   (int, int) _defaultEntryCell(GridBoard board) {
-    return (board.rows ~/ 2, 0);
+    return (0, board.cols ~/ 2);
   }
 
   (int, int) _defaultGoalCell(GridBoard board) {
-    return (board.rows ~/ 2, board.cols - 1);
+    return (board.rows - 1, board.cols ~/ 2);
   }
 
   int _buildOccupancySignature(GridBoard board) {

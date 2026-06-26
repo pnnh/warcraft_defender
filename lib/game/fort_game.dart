@@ -159,18 +159,19 @@ class FortGame extends FlameGame with HasTimeScale {
   }
 
   void _positionComponents() {
+    // Portrait layout: grid centered horizontally, placed below HUD.
+    // Palette sits at the very bottom of the screen.
+    final paletteH = _towerPalette.size.y;
+    final paletteY = size.y - paletteH - 24;
     final paletteX = (size.x - _towerPalette.size.x) / 2;
-    final paletteY = size.y - _towerPalette.size.y - 24;
-    final maxGridY = (paletteY - _grid.size.y - 24).clamp(
-      24.0,
-      double.infinity,
-    );
-    final centeredGridY = ((paletteY - _grid.size.y) / 2).clamp(24.0, maxGridY);
 
-    _grid.position = Vector2(
-      (size.x - _grid.size.x) / 2,
-      centeredGridY.toDouble(),
-    );
+    final gridX = (size.x - _grid.size.x) / 2;
+    // Center the grid vertically in the space between the HUD (top) and palette.
+    final availableTop = 72.0; // room for HUD
+    final availableH = paletteY - availableTop - 16;
+    final gridY = availableTop + ((availableH - _grid.size.y) / 2).clamp(0.0, double.infinity);
+
+    _grid.position = Vector2(gridX, gridY);
     _towerPalette.position = Vector2(paletteX, paletteY);
   }
 

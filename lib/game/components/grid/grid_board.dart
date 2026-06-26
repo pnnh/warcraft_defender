@@ -8,8 +8,8 @@ import 'grid_cell.dart';
 /// Manages cells, placement, and merge interactions.
 class GridBoard extends PositionComponent {
   GridBoard({
-    this.rows = 6,
-    this.cols = 8,
+    this.rows = 8,
+    this.cols = 5,
     this.cellSize = 64.0,
     this.onCellTap,
   }) {

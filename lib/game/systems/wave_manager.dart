@@ -245,10 +245,11 @@ class WaveManager extends Component {
 
     final board = gridBoard;
     if (board != null) {
-      final entryRow = board.rows ~/ 2;
-      final fortRow = board.rows ~/ 2;
-      final entryCol = 0;
-      final fortCol = board.cols - 1;
+      // Portrait: enemies enter top-center, exit bottom-center.
+      final entryRow = 0;
+      final entryCol = board.cols ~/ 2;
+      final fortRow = board.rows - 1;
+      final fortCol = board.cols ~/ 2;
       final stride = board.cellSize + board.gap;
       final inset = (board.cellSize - enemy.size.x) / 2;
 
@@ -298,8 +299,9 @@ class WaveManager extends Component {
       return;
     }
 
-    final entryCenter = _cellCenter(board, board.rows ~/ 2, 0);
-    final fortCenter = _cellCenter(board, board.rows ~/ 2, board.cols - 1);
+    // Portrait: top-center → bottom-center.
+    final entryCenter = _cellCenter(board, 0, board.cols ~/ 2);
+    final fortCenter = _cellCenter(board, board.rows - 1, board.cols ~/ 2);
     final totalDistance = (fortCenter - entryCenter).length;
     if (totalDistance <= 0) {
       return;
@@ -315,7 +317,8 @@ class WaveManager extends Component {
       return false;
     }
 
-    final fortCenter = _cellCenter(board, board.rows ~/ 2, board.cols - 1);
+    // Portrait: fort is at the bottom-center cell.
+    final fortCenter = _cellCenter(board, board.rows - 1, board.cols ~/ 2);
     return enemy.absoluteCenter.distanceTo(fortCenter) <= board.cellSize * 0.18;
   }
 
@@ -384,13 +387,14 @@ class WaveManager extends Component {
     final inset = board.cellSize * 0.08;
     final size = board.cellSize - (inset * 2);
 
+    // Portrait: fort sits at the bottom-center cell of the grid.
     fort
       ..size = Vector2.all(size)
       ..position =
           board.position +
           Vector2(
-            ((board.cols - 1) * stride) + inset,
-            ((board.rows ~/ 2) * stride) + inset,
+            ((board.cols ~/ 2) * stride) + inset,
+            ((board.rows - 1) * stride) + inset,
           );
   }
 }
