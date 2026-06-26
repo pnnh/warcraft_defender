@@ -9,8 +9,7 @@ import '../enemies/base_enemy.dart';
 
 abstract class BaseProjectile extends PositionComponent
     with CollisionCallbacks {
-  BaseProjectile({required this.speed, required ShapeHitbox hitbox})
-    : _hitbox = hitbox {
+  BaseProjectile({required this.speed, required this._hitbox}) {
     anchor = Anchor.center;
     add(_hitbox);
     _setActive(false);
@@ -24,6 +23,8 @@ abstract class BaseProjectile extends PositionComponent
 
   BaseEnemy? _target;
   bool _active = false;
+
+  void Function(BaseProjectile projectile)? onRelease;
 
   @protected
   BaseEnemy? get target => _target;
@@ -116,7 +117,7 @@ abstract class BaseProjectile extends PositionComponent
 
     _target = null;
     _setActive(false);
-    recycle();
+    _release();
   }
 
   void onHit(BaseEnemy target);
@@ -124,6 +125,16 @@ abstract class BaseProjectile extends PositionComponent
   void onMiss() => despawn();
 
   void recycle();
+
+  void _release() {
+    final release = onRelease;
+    if (release != null) {
+      release(this);
+      return;
+    }
+
+    recycle();
+  }
 
   void _setActive(bool value) {
     _active = value;
