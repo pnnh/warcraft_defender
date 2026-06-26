@@ -1,0 +1,46 @@
+lib/game/components/grid/grid_cell.dart
+  s_f2c15111069e33::t_99d6edefa470b8 19-22,30-31,48-61
+lib/game/fort_game.dart
+  s_f2c15111069e33::t_c5a363cca5aeea 43-44
+  s_f2c15111069e33::t_14b0472ad5a9d5 39
+  s_f2c15111069e33::t_db2b3e645f60a4 1-2,7-9,14-20,28-34,36-38,41-42,45-200
+lib/game/components/grid/grid_board.dart
+  s_f2c15111069e33::t_16ed5e40599863 10-15,18-23,34,37,62-107
+  s_a0da97b4f04d6f::t_9db0986c645936 108
+lib/game/components/towers/archer_tower.dart
+  s_f2c15111069e33::t_57dedd2bf67336 13
+  s_f2c15111069e33::t_7e81896181d736 14-19,39
+  s_f2c15111069e33::t_3188393a0d6cf2 40-41
+  s_f2c15111069e33::t_b45bb23fffe36b 9-12,20-23,29-31,33-34,36-37
+lib/game/components/ui/tower_palette.dart
+  s_f2c15111069e33::t_e5fc57d6c4c4d3 128-131,236,246,257,267
+  s_f2c15111069e33::t_c82e396fe94e08 183,186
+  s_f2c15111069e33::t_f3ed6fc4bf9a0a 124-127,157-160
+  s_f2c15111069e33::t_91aa6d890544de 1-123,132-156,161-182,184-185,187-235,237-245,247-256,258-266,268-269
+.beads/issues.jsonl
+  s_f2c15111069e33::t_a92f20d2df79b5 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "0f6f47d3717bae6c653121b622e99e733ade5bb8",
+  "prompts": {},
+  "sessions": {
+    "s_a0da97b4f04d6f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_013TXMityponmbRkD4qRn3XJ",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_f2c15111069e33": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01VcnHZw8KfhbfoMpSDpHcWq",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
