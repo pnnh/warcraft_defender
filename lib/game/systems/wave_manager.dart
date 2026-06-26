@@ -11,7 +11,7 @@ import '../components/enemies/orc_enemy.dart';
 import '../components/enemies/troll_enemy.dart';
 import '../components/enemies/dark_knight_enemy.dart';
 import '../components/enemies/boss_dragon_enemy.dart';
-import '../components/fort_component.dart';
+import '../components/castle_wall_component.dart';
 import '../components/grid/grid_board.dart';
 import '../game_state.dart';
 import 'skill_system.dart';
@@ -86,7 +86,7 @@ class WaveManager extends Component {
   final Map<BaseEnemy, String> _trackedEnemies = <BaseEnemy, String>{};
   final math.Random _rng = math.Random();
 
-  FortComponent? _fortComponent;
+  CastleWallComponent? _fortComponent;
 
   int get fortHp => _fortHp;
   bool get gameOver => _gameOver;
@@ -147,8 +147,14 @@ class WaveManager extends Component {
       return;
     }
 
-    final fort = FortComponent(maxHp: fortMaxHp)
-      ..priority = 1
+    final board = gridBoard;
+    final fort = CastleWallComponent(
+      cols: board?.cols ?? 5,
+      cellSize: board?.cellSize ?? 64,
+      gap: board?.gap ?? 2,
+      maxHp: fortMaxHp,
+    )
+      ..priority = 2
       ..getEnemies = () => activeEnemies;
     _fortComponent = fort;
     _syncFortComponent();
@@ -256,7 +262,8 @@ class WaveManager extends Component {
     if (board != null) {
       // Pick a random column so enemies spread across the top edge.
       final entryCol = _rng.nextInt(board.cols);
-      final fortRow = board.rows - 1;
+      // Enemies path to the castle row (lockRows row) as their target.
+      final fortRow = board.lockRows;
       final fortCol = board.cols ~/ 2;
       final stride = board.cellSize + board.gap;
       final inset = (board.cellSize - enemy.size.x) / 2;
@@ -308,8 +315,9 @@ class WaveManager extends Component {
   bool _isNearFort(BaseEnemy enemy) {
     final board = gridBoard;
     if (board == null) return false;
-    final fortCenter = _cellCenter(board, board.rows - 1, board.cols ~/ 2);
-    return enemy.absoluteCenter.distanceTo(fortCenter) <= board.cellSize * 1.1;
+    // Castle wall is centered on the lockRows boundary.
+    final fortCenter = _cellCenter(board, board.lockRows, board.cols ~/ 2);
+    return enemy.absoluteCenter.distanceTo(fortCenter) <= board.cellSize * 1.2;
   }
 
   void _applyFortDamage(int damage) {
@@ -332,9 +340,9 @@ class WaveManager extends Component {
       return;
     }
 
-    // Portrait: top-center → bottom-center.
+    // Progress: distance travelled from spawn row toward the castle row.
     final entryCenter = _cellCenter(board, 0, board.cols ~/ 2);
-    final fortCenter = _cellCenter(board, board.rows - 1, board.cols ~/ 2);
+    final fortCenter = _cellCenter(board, board.lockRows, board.cols ~/ 2);
     final totalDistance = (fortCenter - entryCenter).length;
     if (totalDistance <= 0) {
       return;
@@ -363,24 +371,20 @@ class WaveManager extends Component {
 
   void _syncFortComponent() {
     final board = gridBoard;
-    final fort = _fortComponent;
-    if (board == null || fort == null) {
+    final wall = _fortComponent;
+    if (board == null || wall == null) {
       return;
     }
 
     final stride = board.cellSize + board.gap;
-    final inset = board.cellSize * 0.08;
-    final size = board.cellSize - (inset * 2);
+    final wallH = board.cellSize;
 
-    // Portrait: fort sits at the bottom-center cell of the grid.
-    fort
-      ..size = Vector2.all(size)
-      ..position =
-          board.position +
-          Vector2(
-            ((board.cols ~/ 2) * stride) + inset,
-            ((board.rows - 1) * stride) + inset,
-          );
+    // Castle wall sits at the boundary between combat zone and building zone.
+    // Its top edge is flush with the start of lockRows row (castle row).
+    wall
+      ..size = Vector2(board.size.x, wallH)
+      ..position = board.position +
+          Vector2(0, board.lockRows * stride - wallH / 2);
   }
 }
 

@@ -11,6 +11,9 @@ class GridBoard extends PositionComponent {
     this.rows = 8,
     this.cols = 5,
     this.cellSize = 64.0,
+    /// Rows 0..lockRows (inclusive) are locked – combat zone + castle row.
+    /// Building is only allowed in rows > lockRows.
+    this.lockRows = 0,
     this.onCellTap,
   }) {
     cells = List.generate(rows, (row) {
@@ -19,6 +22,7 @@ class GridBoard extends PositionComponent {
           row: row,
           col: col,
           cellSize: cellSize,
+          isLocked: row <= lockRows,
           onTap: (cell) => onCellTap?.call(cell),
         )
           ..position = Vector2(col * (cellSize + gap), row * (cellSize + gap));
@@ -31,6 +35,12 @@ class GridBoard extends PositionComponent {
   final int cols;
   final double cellSize;
   final double gap = 2.0;
+
+  /// Number of rows from the top that belong to the combat zone.
+  /// Row [lockRows] is the castle wall row (also locked).
+  /// Building is allowed in rows [lockRows + 1] to [rows - 1].
+  final int lockRows;
+
   final void Function(GridCell)? onCellTap;
 
   late final List<List<GridCell>> cells;
@@ -111,14 +121,7 @@ class GridBoard extends PositionComponent {
 
   @override
   void render(Canvas canvas) {
-    final panelPaint = Paint()
-      ..color = const Color(0xAA101010)
-      ..style = PaintingStyle.fill;
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(size.toRect(), const Radius.circular(8)),
-      panelPaint,
-    );
-
+    // No background panel – individual cells provide the tiled texture.
     super.render(canvas);
   }
 }

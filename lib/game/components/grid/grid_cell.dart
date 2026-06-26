@@ -12,13 +12,13 @@ class GridCell extends PositionComponent with TapCallbacks {
     required this.row,
     required this.col,
     required this.cellSize,
+    this.isLocked = false,
     this.onTap,
   }) : super(size: Vector2.all(cellSize));
 
-  static const Color _emptyFillColor = Color(0xFF3A3A3A);
-  static const Color _emptyBorderColor = Color(0xFF555555);
-  static const Color _occupiedFillColor = Color(0xFF1A3A1A);
-  static const Color _occupiedBorderColor = Color(0xFF44AA44);
+  static const Color _buildBorderColor = Color(0x44AAAAAA);
+  static const Color _occupiedFillColor = Color(0x221AFF1A);
+  static const Color _occupiedBorderColor = Color(0x8844AA44);
   static const Color _ghostValidFillColor = Color(0x6633D1FF);
   static const Color _ghostValidBorderColor = Color(0xFF7FE7FF);
   static const Color _ghostInvalidFillColor = Color(0x66FF5A5A);
@@ -28,6 +28,9 @@ class GridCell extends PositionComponent with TapCallbacks {
   final int col;
   final double cellSize;
   final void Function(GridCell)? onTap;
+
+  /// True for combat-zone and castle-wall rows – no building allowed here.
+  final bool isLocked;
 
   bool isOccupied = false;
   bool isGhosted = false;
@@ -53,41 +56,56 @@ class GridCell extends PositionComponent with TapCallbacks {
 
     final rect = size.toRect();
     final tile = _tileSprite;
-    if (tile != null && !isGhosted) {
+
+    // Always render the tile texture as the base layer.
+    if (tile != null) {
       tile.render(canvas, size: size);
-      if (isOccupied) {
-        canvas.drawRect(rect,
-            Paint()..color = const Color(0x441AFF1A)..style = PaintingStyle.fill);
-      }
-    } else {
-      final fillPaint = Paint()
-        ..color = isOccupied ? _occupiedFillColor : _emptyFillColor
-        ..style = PaintingStyle.fill;
-      final borderPaint = Paint()
-        ..color = isOccupied ? _occupiedBorderColor : _emptyBorderColor
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2;
-      canvas.drawRect(rect, fillPaint);
-      canvas.drawRect(rect, borderPaint);
     }
 
     if (isGhosted) {
       final ghostFillPaint = Paint()
-        ..color = isGhostValid ? _ghostValidFillColor : _ghostInvalidFillColor
-        ..style = PaintingStyle.fill;
+        ..color = isGhostValid ? _ghostValidFillColor : _ghostInvalidFillColor;
       final ghostBorderPaint = Paint()
-        ..color =
-            isGhostValid ? _ghostValidBorderColor : _ghostInvalidBorderColor
+        ..color = isGhostValid ? _ghostValidBorderColor : _ghostInvalidBorderColor
         ..style = PaintingStyle.stroke
         ..strokeWidth = 3;
       canvas.drawRect(rect, ghostFillPaint);
       canvas.drawRect(rect, ghostBorderPaint);
+      return;
+    }
+
+    if (isLocked) {
+      // Combat zone: subtle dark vignette, no build border
+      canvas.drawRect(rect, Paint()..color = const Color(0x33000000));
+      return;
+    }
+
+    // Building zone: thin border to show placeable cells
+    if (isOccupied) {
+      canvas.drawRect(rect, Paint()..color = _occupiedFillColor);
+      canvas.drawRect(
+        rect,
+        Paint()
+          ..color = _occupiedBorderColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.5,
+      );
+    } else {
+      canvas.drawRect(
+        rect,
+        Paint()
+          ..color = _buildBorderColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1,
+      );
     }
   }
 
   @override
   void onTapDown(TapDownEvent event) {
-    onTap?.call(this);
+    if (!isLocked) {
+      onTap?.call(this);
+    }
     super.onTapDown(event);
   }
 }

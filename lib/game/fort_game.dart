@@ -46,7 +46,27 @@ class FortGame extends FlameGame with HasTimeScale {
     GameState.instance.setSpeed(1.0);
     _syncGoldState();
 
-    _grid = GridBoard();
+    // Compute grid dimensions so the tile texture covers the full screen width.
+    const gridCols = 5;
+    const gridGap = 2.0;
+    const paletteH = 90.0;
+    const paletteBottomPad = 24.0;
+    final availH = size.y - paletteH - paletteBottomPad - 4.0;
+    final cellSize = ((size.x - gridCols * gridGap) / gridCols)
+        .floorToDouble()
+        .clamp(40.0, 100.0);
+    final rows = ((availH + gridGap) / (cellSize + gridGap))
+        .floor()
+        .clamp(6, 16);
+    // lockRows: rows in the combat zone + castle row; ~60% of total rows.
+    final lockRows = (rows * 0.6).round().clamp(2, rows - 2);
+
+    _grid = GridBoard(
+      rows: rows,
+      cols: gridCols,
+      cellSize: cellSize,
+      lockRows: lockRows,
+    );
     _towerPalette = TowerPalette(
       currentGold: () => gold,
       onDragStart: _handleTowerDragStart,
@@ -159,19 +179,13 @@ class FortGame extends FlameGame with HasTimeScale {
   }
 
   void _positionComponents() {
-    // Portrait layout: grid centered horizontally, placed below HUD.
-    // Palette sits at the very bottom of the screen.
-    final paletteH = _towerPalette.size.y;
-    final paletteY = size.y - paletteH - 24;
+    // Grid fills the full screen width from y=0 (tiles cover the whole canvas).
+    const paletteH = 90.0;
+    const paletteBottomPad = 24.0;
+    final paletteY = size.y - paletteH - paletteBottomPad;
     final paletteX = (size.x - _towerPalette.size.x) / 2;
 
-    final gridX = (size.x - _grid.size.x) / 2;
-    // Center the grid vertically in the space between the HUD (top) and palette.
-    final availableTop = 72.0; // room for HUD
-    final availableH = paletteY - availableTop - 16;
-    final gridY = availableTop + ((availableH - _grid.size.y) / 2).clamp(0.0, double.infinity);
-
-    _grid.position = Vector2(gridX, gridY);
+    _grid.position = Vector2(0, 0);
     _towerPalette.position = Vector2(paletteX, paletteY);
   }
 
@@ -204,7 +218,7 @@ class FortGame extends FlameGame with HasTimeScale {
     final targetCell = _grid.cellAtCanvasPosition(canvasPosition);
 
     // --- Merge path: drop onto an occupied cell with the same tower type ---
-    if (targetCell != null && targetCell.isOccupied) {
+    if (targetCell != null && !targetCell.isLocked && targetCell.isOccupied) {
       final existingTower = targetCell.occupyingTower;
       if (existingTower != null && existingTower.type == entry.id) {
         // Only attempt merge if we can afford the new tower (merge costs one unit)
@@ -226,6 +240,7 @@ class FortGame extends FlameGame with HasTimeScale {
     // --- Normal placement path ---
     final canPlace =
         targetCell != null &&
+        !targetCell.isLocked &&
         !targetCell.isOccupied &&
         gold >= dragPlacement.entry.cost;
 
@@ -252,12 +267,14 @@ class FortGame extends FlameGame with HasTimeScale {
 
     final targetCell = _grid.cellAtCanvasPosition(canvasPosition);
 
-    // Valid if: empty cell with enough gold, OR occupied by same-type tower for merge
+    // Valid if: unlocked empty cell with enough gold, OR same-type tower for merge
     final isMergeTarget = targetCell != null &&
+        !targetCell.isLocked &&
         targetCell.isOccupied &&
         targetCell.occupyingTower?.type == dragPlacement.entry.id &&
         gold >= dragPlacement.entry.cost;
     final isPlaceTarget = targetCell != null &&
+        !targetCell.isLocked &&
         !targetCell.isOccupied &&
         gold >= dragPlacement.entry.cost;
     final isValidDrop = isMergeTarget || isPlaceTarget;
