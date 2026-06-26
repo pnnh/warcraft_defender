@@ -1,0 +1,31 @@
+.beads/issues.jsonl
+  s_1f89fdb3436bd3::t_392b88d03fe4ea 6
+lib/game/components/towers/archer_tower.dart
+  s_a0da97b4f04d6f::t_02c27cdf408c81 1-53
+lib/game/components/towers/cannon_tower.dart
+  s_a0da97b4f04d6f::t_b8d03d232a624a 1-71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "6bac415c76fa6da0b85568b7667444428345e278",
+  "prompts": {},
+  "sessions": {
+    "s_1f89fdb3436bd3": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_013bhfZXZTr5LsvL6HgVkMcB",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_a0da97b4f04d6f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_013TXMityponmbRkD4qRn3XJ",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
