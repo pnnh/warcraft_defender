@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 
+import '../audio/audio_manager.dart';
 import '../components/effects/merge_animation.dart';
 import '../components/effects/particle_effects.dart';
 import '../components/towers/archer_tower.dart';
@@ -51,6 +52,7 @@ class MergeSystem {
     );
     ParticleEffects.spawnMergeShimmer(parent, center);
     ParticleEffects.spawnLevelUpGlow(parent, center, cellSize: cellSize);
+    AudioManager.instance.playMergeSuccess();
 
     return merged;
   }

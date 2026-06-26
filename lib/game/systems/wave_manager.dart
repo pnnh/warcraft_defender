@@ -3,10 +3,13 @@ import 'dart:convert';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 
+import '../audio/audio_manager.dart';
 import '../components/enemies/base_enemy.dart';
 import '../components/enemies/goblin_enemy.dart';
 import '../components/fort_component.dart';
 import '../components/grid/grid_board.dart';
+import '../game_state.dart';
+import 'skill_system.dart';
 
 class WaveConfig {
   const WaveConfig({required this.wave, required this.enemyGroups});
@@ -89,6 +92,8 @@ class WaveManager extends Component {
     await _loadWaveConfig();
     await _ensureFortComponent();
 
+    GameState.instance.updateFortHp(fortMaxHp, maxHp: fortMaxHp);
+
     if (_waves.isNotEmpty) {
       startNextWave();
     }
@@ -145,6 +150,7 @@ class WaveManager extends Component {
 
     final config = _waves[currentWave];
     currentWave += 1;
+    GameState.instance.updateWave(currentWave);
     _waveActive = true;
     _spawnTimer = 0;
     _nextWaveDelay = 0;
@@ -332,6 +338,8 @@ class WaveManager extends Component {
 
     _fortHp = (_fortHp - damage).clamp(0, fortMaxHp);
     _fortComponent?.takeDamage(damage);
+    GameState.instance.updateFortHp(_fortHp, maxHp: fortMaxHp);
+    AudioManager.instance.playFortHit();
     _aliveEnemyCount = (_aliveEnemyCount - 1).clamp(0, 999999);
 
     if (_fortHp == 0) {
@@ -344,6 +352,9 @@ class WaveManager extends Component {
 
   void enemyKilled() {
     _aliveEnemyCount = (_aliveEnemyCount - 1).clamp(0, 999999);
+    final goldReward = 5 + SkillSystem.instance.bonusGoldPerKill;
+    GameState.instance.addGold(goldReward);
+    AudioManager.instance.playEnemyDeathSmall();
   }
 
   void _syncFortComponent() {
