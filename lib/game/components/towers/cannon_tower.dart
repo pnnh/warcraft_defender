@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 
 import '../enemies/base_enemy.dart';
+import '../projectiles/cannonball_projectile.dart';
 import 'base_tower.dart';
 
 class CannonTower extends BaseTower {
@@ -30,16 +31,11 @@ class CannonTower extends BaseTower {
 
   @override
   void onFire(BaseEnemy target) {
-    final enemies = parent?.children.whereType<BaseEnemy>() ?? const [];
-    for (final enemy in enemies) {
-      if (!enemy.isAlive) {
-        continue;
-      }
-
-      final distance = enemy.absoluteCenter.distanceTo(target.absoluteCenter);
-      if (distance <= 40) {
-        enemy.takeDamage(attackDamage);
-      }
+    final cannonball = CannonballProjectile.acquire()
+      ..configure(damage: attackDamage, splashRadius: 40);
+    cannonball.launch(target: target, from: absoluteCenter);
+    if (cannonball.parent == null) {
+      parent?.add(cannonball);
     }
 
     _flashTimer = 0.2;

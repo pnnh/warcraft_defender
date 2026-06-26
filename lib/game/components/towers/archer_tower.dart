@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 
 import '../enemies/base_enemy.dart';
+import '../projectiles/arrow_projectile.dart';
 import 'base_tower.dart';
 
 class ArcherTower extends BaseTower {
@@ -38,6 +39,10 @@ class ArcherTower extends BaseTower {
 
   @override
   void onFire(BaseEnemy target) {
-    target.takeDamage(attackDamage);
+    final arrow = ArrowProjectile.acquire()..configure(damage: attackDamage);
+    arrow.launch(target: target, from: absoluteCenter);
+    if (arrow.parent == null) {
+      parent?.add(arrow);
+    }
   }
 }
