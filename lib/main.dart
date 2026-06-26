@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'game/game_state.dart';
 import 'data/persistence_service.dart';
 import 'ui/screens/game_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PersistenceService.instance.initialize();
-  runApp(const WarcraftDefenderApp());
+  runApp(
+    ChangeNotifierProvider.value(
+      value: GameState.instance,
+      child: const WarcraftDefenderApp(),
+    ),
+  );
 }
 
 class WarcraftDefenderApp extends StatelessWidget {

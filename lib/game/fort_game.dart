@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'package:flame/components.dart' show HasTimeScale;
 import 'package:flame/game.dart';
 
+import 'game_state.dart';
 import 'audio/audio_manager.dart';
 import 'components/grid/grid_board.dart';
 import 'components/grid/grid_cell.dart';
@@ -10,7 +12,7 @@ import 'components/ui/tower_palette.dart';
 
 /// Main FlameGame entry point for Fort Guardian.
 /// Orchestrates all game systems: grid, waves, skills, and combat.
-class FortGame extends FlameGame {
+class FortGame extends FlameGame with HasTimeScale {
   static const int startingGold = 150;
 
   late final GridBoard _grid;
@@ -37,6 +39,9 @@ class FortGame extends FlameGame {
     await add(_grid);
     await add(_towerPalette);
     _positionComponents();
+    GameState.instance.addListener(() {
+      timeScale = GameState.instance.speed;
+    });
   }
 
   @override
