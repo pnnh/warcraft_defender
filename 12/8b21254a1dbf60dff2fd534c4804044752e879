@@ -1,0 +1,37 @@
+.beads/issues.jsonl
+  s_78e2a6689eb73f::t_e7718c9fdbe728 2,26
+lib/game/fort_game.dart
+  s_78e2a6689eb73f::t_b188ecf90fc37e 6,42-44
+  s_78e2a6689eb73f::t_f8cbd5311b3ab9 3,15
+lib/ui/widgets/hud_overlay.dart
+  s_78e2a6689eb73f::t_b188ecf90fc37e 2-4,11-68,70-90,92-101,104-137,139-143,146-172
+  s_64486d8d655baf::t_aa6ce0cca0907a 138,144-145
+  s_78e2a6689eb73f::t_f8cbd5311b3ab9 69
+  s_78e2a6689eb73f::t_b8384f44f00f34 91,102-103
+lib/main.dart
+  s_78e2a6689eb73f::t_b188ecf90fc37e 2-4,11-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "128b21254a1dbf60dff2fd534c4804044752e879",
+  "prompts": {},
+  "sessions": {
+    "s_64486d8d655baf": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01DwW6tzQd8vXBfq7qoJvXTA",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_78e2a6689eb73f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01FWjQsatgHtLdZjDJKKXfEa",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
