@@ -1,0 +1,44 @@
+.beads/issues.jsonl
+  s_e0a7f5c41fca58::t_0a7a56e34b6ab9 1
+  s_78e2a6689eb73f::t_59fae051c80c6a 21
+  s_eee40894373268::t_ecf02f248ee6c4 2,26-27
+lib/ui/screens/stats_screen.dart
+  s_eee40894373268::t_708a8cf7232801 1-152
+lib/data/persistence_service.dart
+  s_eee40894373268::t_708a8cf7232801 1-123
+  s_eee40894373268::t_98d0f6413c0c8e 124-125
+lib/main.dart
+  s_eee40894373268::t_708a8cf7232801 2,5-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "6047911d5d8901f342be22698a761a6327786d20",
+  "prompts": {},
+  "sessions": {
+    "s_78e2a6689eb73f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01FWjQsatgHtLdZjDJKKXfEa",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_e0a7f5c41fca58": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a9b51b44-0a53-4db6-a45e-d331f119a3c4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_eee40894373268": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_015Rty6dEuUoD6dXDjTJyWM9",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
