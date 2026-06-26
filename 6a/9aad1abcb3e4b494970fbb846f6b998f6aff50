@@ -1,0 +1,49 @@
+lib/game/components/projectiles/base_projectile.dart
+  s_71997312faf0fc::t_ee555395f57a95 10-13,51-53,130-132
+  s_71997312faf0fc::t_0b57a52d103b19 1-9,14-50,54-129,133-157
+lib/game/components/towers/archer_tower.dart
+  s_71997312faf0fc::t_0b57a52d103b19 6,42-46
+.beads/issues.jsonl
+  s_2a7b574014d56f::t_ffbf848b0fc69f 3-5
+  s_e0a7f5c41fca58::t_416bb5c6f060ec 14
+lib/game/components/projectiles/cannonball_projectile.dart
+  s_71997312faf0fc::t_ee555395f57a95 16-18,33-34
+  s_71997312faf0fc::t_0b57a52d103b19 1-15,19-32,35-62
+lib/game/components/towers/cannon_tower.dart
+  s_71997312faf0fc::t_0b57a52d103b19 6,34-38
+lib/game/components/projectiles/arrow_projectile.dart
+  s_71997312faf0fc::t_ee555395f57a95 12,16-18
+  s_71997312faf0fc::t_0b57a52d103b19 1-11,13-15,19-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "6a9aad1abcb3e4b494970fbb846f6b998f6aff50",
+  "prompts": {},
+  "sessions": {
+    "s_2a7b574014d56f": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01Qf8durcKt3ma5i4iVm6jct",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_71997312faf0fc": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01Uc2oiLvQ7HHcTzWjJU1Smc",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_e0a7f5c41fca58": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a9b51b44-0a53-4db6-a45e-d331f119a3c4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
