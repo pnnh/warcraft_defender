@@ -46,7 +46,8 @@ class ArcherTower extends BaseTower {
   @override
   void onFire(BaseEnemy target) {
     final arrow = ArrowProjectile.acquire()..configure(damage: attackDamage);
-    arrow.launch(target: target, from: absoluteCenter);
+    // Use parent-local center so the arrow is in the same coordinate space as its parent (GridBoard).
+    arrow.launch(target: target, from: position + size * 0.5);
     if (arrow.parent == null) {
       parent?.add(arrow);
     }

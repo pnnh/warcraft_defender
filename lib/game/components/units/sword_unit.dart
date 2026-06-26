@@ -15,7 +15,7 @@ class SwordUnit extends BaseUnit {
         attackRange: 36,
         attackCooldown: 0.9,
       ) {
-    size = Vector2.all(30);
+    size = Vector2.all(36);
     anchor = Anchor.center;
   }
 

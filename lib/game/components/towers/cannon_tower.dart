@@ -35,7 +35,7 @@ class CannonTower extends BaseTower {
   void onFire(BaseEnemy target) {
     final cannonball = CannonballProjectile.acquire()
       ..configure(damage: attackDamage, splashRadius: 40);
-    cannonball.launch(target: target, from: absoluteCenter);
+    cannonball.launch(target: target, from: position + size * 0.5);
     if (cannonball.parent == null) {
       parent?.add(cannonball);
     }

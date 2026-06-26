@@ -16,7 +16,7 @@ class ArcherUnit extends BaseUnit {
         attackRange: 160,
         attackCooldown: 1.2,
       ) {
-    size = Vector2.all(28);
+    size = Vector2.all(36);
     anchor = Anchor.center;
   }
 
@@ -36,7 +36,7 @@ class ArcherUnit extends BaseUnit {
         projectileSpeed: 300,
         splashRadius: 0,
         color: const Color(0xFFFFD700),
-        startPosition: absoluteCenter,
+        startPosition: position + size * 0.5,
       ),
     );
   }

@@ -47,24 +47,24 @@ class TowerPalette extends PositionComponent {
   static const List<TowerPaletteEntry> items = [
     TowerPaletteEntry(
       type: TowerType.archer,
-      label: 'Archer',
+      label: '弓箭手',
       cost: 50,
-      fillColor: Color(0xFF8B4513),
-      accentColor: Color(0xFFFFD700),
+      fillColor: Color(0xFF2E6B2E),
+      accentColor: Color(0xFF88FF44),
     ),
     TowerPaletteEntry(
       type: TowerType.cannon,
-      label: 'Cannon',
+      label: '剑士',
       cost: 80,
-      fillColor: Color(0xFF5B5B5B),
-      accentColor: Color(0xFFC8C8C8),
+      fillColor: Color(0xFF1A3A6A),
+      accentColor: Color(0xFF88CCFF),
     ),
     TowerPaletteEntry(
       type: TowerType.magic,
-      label: 'Magic',
+      label: '法师',
       cost: 120,
       fillColor: Color(0xFF6A2D91),
-      accentColor: Color(0xFF6EE7FF),
+      accentColor: Color(0xFFCC88FF),
     ),
   ];
 

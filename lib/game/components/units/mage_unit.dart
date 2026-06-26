@@ -16,7 +16,7 @@ class MageUnit extends BaseUnit {
         attackRange: 130,
         attackCooldown: 2.0,
       ) {
-    size = Vector2.all(28);
+    size = Vector2.all(36);
     anchor = Anchor.center;
   }
 
@@ -34,9 +34,9 @@ class MageUnit extends BaseUnit {
         damage: damage,
         assetName: 'fireball.png',
         projectileSpeed: 200,
-        splashRadius: 48, // AoE fireball
+        splashRadius: 48,
         color: const Color(0xFFFF6600),
-        startPosition: absoluteCenter,
+        startPosition: position + size * 0.5,
       ),
     );
   }

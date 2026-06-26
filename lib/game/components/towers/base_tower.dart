@@ -101,7 +101,8 @@ abstract class BaseTower extends PositionComponent implements SkillTarget {
         _spawnTimer = 0;
         final unit = createUnit(cb);
         if (unit != null) {
-          unit.position = absoluteCenter.clone();
+          // Use parent-local center so the unit shares the same coordinate space as the tower.
+          unit.position = position + size * 0.5;
           parent?.add(unit);
         }
       }
