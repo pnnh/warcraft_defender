@@ -1,0 +1,30 @@
+lib/ui/screens/game_screen.dart
+  s_927162ce344bf3::t_dab6a6d3d42d84 1,3-4,6-11,14,17-85,90-91,94-110,116-130
+lib/game/components/towers/base_tower.dart
+  s_927162ce344bf3::t_992e3d1991e0da 52-54
+  s_927162ce344bf3::t_dab6a6d3d42d84 4,7,14-16,18,21-38,43-51,55
+  s_927162ce344bf3::t_87e5569418439f 56
+lib/ui/widgets/skill_select_overlay.dart
+  s_927162ce344bf3::t_75044a35985b5e 82
+  s_927162ce344bf3::t_dab6a6d3d42d84 1-45,48-81,83-117
+  s_927162ce344bf3::t_992e3d1991e0da 46-47
+lib/game/systems/skill_system.dart
+  s_927162ce344bf3::t_992e3d1991e0da 55,310-312,333
+  s_927162ce344bf3::t_dab6a6d3d42d84 1-54,56-60,63-309,313-332,334-354
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "4ef56768a1097e33f860192032850a1f4018f9c4",
+  "prompts": {},
+  "sessions": {
+    "s_927162ce344bf3": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01MQVEx4Zk4xeu86CZm5n3bK",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
