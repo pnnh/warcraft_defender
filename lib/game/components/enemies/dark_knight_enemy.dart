@@ -16,6 +16,12 @@ class DarkKnightEnemy extends BaseEnemy with EnemyMover {
   String get spriteKey => 'dark_knight';
 
   @override
+  double get fortAttackDamage => 20.0;
+
+  @override
+  double get fortAttackInterval => 1.2;
+
+  @override
   void update(double dt) {
     super.update(dt);
     updateMovement(dt);

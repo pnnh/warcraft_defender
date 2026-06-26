@@ -5,12 +5,14 @@ class GameOverScreen extends StatelessWidget {
     super.key,
     required this.wavesReached,
     required this.goldEarned,
+    required this.enemiesKilled,
     required this.onRetry,
     required this.onMenu,
   });
 
   final int wavesReached;
   final int goldEarned;
+  final int enemiesKilled;
   final VoidCallback onRetry;
   final VoidCallback onMenu;
 
@@ -48,6 +50,12 @@ class GameOverScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              _StatRow(
+                label: 'Enemies Killed',
+                value: '$enemiesKilled',
+                icon: '⚔️',
+              ),
+              const SizedBox(height: 8),
               _StatRow(
                 label: 'Waves Survived',
                 value: '$wavesReached',

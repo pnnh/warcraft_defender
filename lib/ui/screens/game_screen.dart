@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../game/fort_game.dart';
@@ -55,61 +56,79 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GameWidget<FortGame>(
-        game: _game,
-        initialActiveOverlays: const <String>['hud'],
-        overlayBuilderMap: {
-          'hud': (context, game) => const HudOverlay(),
-          'gameOver': (context, game) => GameOverScreen(
-            wavesReached: GameState.instance.wave,
-            goldEarned: GameState.instance.gold,
-            onRetry: () {
-              game.overlays.remove('gameOver');
-              AudioManager.instance.onGameplayStart();
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => const GameScreen()),
-              );
-            },
-            onMenu: () {
-              game.overlays.remove('gameOver');
-              AudioManager.instance.stopBgm();
-              Navigator.of(context).popUntil((route) => route.isFirst);
-            },
-          ),
-          'victory': (context, game) => VictoryScreen(
-            goldEarned: GameState.instance.gold,
-            onRetry: () {
-              game.overlays.remove('victory');
-              AudioManager.instance.onGameplayStart();
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => const GameScreen()),
-              );
-            },
-            onMenu: () {
-              game.overlays.remove('victory');
-              AudioManager.instance.stopBgm();
-              Navigator.of(context).popUntil((route) => route.isFirst);
-            },
-          ),
-          'skillSelect': (context, game) {
-            final selection = SkillSystem.instance.pendingSelection;
-            if (selection == null) {
-              return const SizedBox.shrink();
-            }
-
-            return SkillSelectOverlay(
-              options: selection.options,
-              onSelected: (skill) {
-                SkillSystem.instance.completeSelection(skill);
-                for (final tower in _collectTowers(game)) {
-                  SkillSystem.instance.applySkillToTarget(skill, tower);
-                }
-                game.resumeEngine();
-              },
+    final gameWidget = GameWidget<FortGame>(
+      game: _game,
+      loadingBuilder: (context) => const ColoredBox(
+        color: Colors.black,
+        child: Center(
+          child: CircularProgressIndicator(color: Colors.amber),
+        ),
+      ),
+      initialActiveOverlays: const <String>['hud'],
+      overlayBuilderMap: {
+        'hud': (context, game) => const HudOverlay(),
+        'gameOver': (context, game) => GameOverScreen(
+          wavesReached: GameState.instance.wave,
+          goldEarned: GameState.instance.gold,
+          enemiesKilled: GameState.instance.enemiesKilled,
+          onRetry: () {
+            game.overlays.remove('gameOver');
+            AudioManager.instance.onGameplayStart();
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const GameScreen()),
             );
           },
+          onMenu: () {
+            game.overlays.remove('gameOver');
+            AudioManager.instance.stopBgm();
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          },
+        ),
+        'victory': (context, game) => VictoryScreen(
+          goldEarned: GameState.instance.gold,
+          onRetry: () {
+            game.overlays.remove('victory');
+            AudioManager.instance.onGameplayStart();
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const GameScreen()),
+            );
+          },
+          onMenu: () {
+            game.overlays.remove('victory');
+            AudioManager.instance.stopBgm();
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          },
+        ),
+        'skillSelect': (context, game) {
+          final selection = SkillSystem.instance.pendingSelection;
+          if (selection == null) {
+            return const SizedBox.shrink();
+          }
+
+          return SkillSelectOverlay(
+            options: selection.options,
+            onSelected: (skill) {
+              SkillSystem.instance.completeSelection(skill);
+              for (final tower in _collectTowers(game)) {
+                SkillSystem.instance.applySkillToTarget(skill, tower);
+              }
+              game.resumeEngine();
+            },
+          );
         },
+      },
+    );
+
+    if (!kIsWeb) {
+      return Scaffold(body: gameWidget);
+    }
+
+    // On web, wrap with a Listener to unblock BGM on first user interaction.
+    return Scaffold(
+      body: Listener(
+        behavior: HitTestBehavior.translucent,
+        onPointerDown: (_) => AudioManager.instance.onUserInteraction(),
+        child: gameWidget,
       ),
     );
   }

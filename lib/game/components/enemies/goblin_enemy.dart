@@ -16,6 +16,9 @@ class GoblinEnemy extends BaseEnemy with EnemyMover {
   String get spriteKey => 'goblin';
 
   @override
+  double get fortAttackDamage => 8.0;
+
+  @override
   void update(double dt) {
     super.update(dt);
     updateMovement(dt);

@@ -38,6 +38,8 @@ mixin EnemyMover on BaseEnemy {
   }
 
   void updateMovement(double dt) {
+    if (isAttackingFort) return;
+
     final board = gridBoard;
     if (board == null) {
       return;

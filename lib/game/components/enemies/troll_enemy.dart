@@ -16,6 +16,12 @@ class TrollEnemy extends BaseEnemy with EnemyMover {
   String get spriteKey => 'troll';
 
   @override
+  double get fortAttackDamage => 25.0;
+
+  @override
+  double get fortAttackInterval => 2.0;
+
+  @override
   void update(double dt) {
     super.update(dt);
     updateMovement(dt);

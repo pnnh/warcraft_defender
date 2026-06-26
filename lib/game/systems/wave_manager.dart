@@ -145,7 +145,9 @@ class WaveManager extends Component {
       return;
     }
 
-    final fort = FortComponent(maxHp: fortMaxHp)..priority = 1;
+    final fort = FortComponent(maxHp: fortMaxHp)
+      ..priority = 1
+      ..getEnemies = () => activeEnemies;
     _fortComponent = fort;
     _syncFortComponent();
     await parent!.add(fort);
@@ -246,6 +248,7 @@ class WaveManager extends Component {
     }
     enemy.health *= spawn.healthMult;
     enemy.speed *= spawn.speedMult;
+    enemy.onAttackFort = (damage) => _applyFortDamage(damage);
 
     final board = gridBoard;
     if (board != null) {
@@ -279,13 +282,13 @@ class WaveManager extends Component {
     for (final entry in _trackedEnemies.entries) {
       final enemy = entry.key;
 
-      if (_hasReachedFort(enemy)) {
-        enemyReachedFort(enemy, _breachDamageFor(entry.value));
-        processed.add(enemy);
-        continue;
+      // When an enemy reaches fort proximity, stop it and let it attack.
+      if (!enemy.isAttackingFort && _isNearFort(enemy)) {
+        enemy.isAttackingFort = true;
       }
 
       _updateEnemyProgress(enemy);
+
       if (!enemy.isAlive || enemy.parent == null) {
         processed.add(enemy);
         enemyKilled();
@@ -294,6 +297,28 @@ class WaveManager extends Component {
 
     for (final enemy in processed) {
       _trackedEnemies.remove(enemy);
+    }
+  }
+
+  /// Returns true when an enemy is close enough to the fort to start attacking.
+  bool _isNearFort(BaseEnemy enemy) {
+    final board = gridBoard;
+    if (board == null) return false;
+    final fortCenter = _cellCenter(board, board.rows - 1, board.cols ~/ 2);
+    return enemy.absoluteCenter.distanceTo(fortCenter) <= board.cellSize * 1.1;
+  }
+
+  void _applyFortDamage(int damage) {
+    if (_gameOver) return;
+    _fortHp = (_fortHp - damage).clamp(0, fortMaxHp);
+    _fortComponent?.takeDamage(damage);
+    GameState.instance.updateFortHp(_fortHp, maxHp: fortMaxHp);
+    AudioManager.instance.playFortHit();
+    if (_fortHp == 0) {
+      _gameOver = true;
+      _waveActive = false;
+      _nextWaveDelay = 0;
+      onGameOver();
     }
   }
 
@@ -315,17 +340,6 @@ class WaveManager extends Component {
     enemy.pathProgress = (currentDistance / totalDistance).clamp(0.0, 1.0);
   }
 
-  bool _hasReachedFort(BaseEnemy enemy) {
-    final board = gridBoard;
-    if (board == null) {
-      return false;
-    }
-
-    // Portrait: fort is at the bottom-center cell.
-    final fortCenter = _cellCenter(board, board.rows - 1, board.cols ~/ 2);
-    return enemy.absoluteCenter.distanceTo(fortCenter) <= board.cellSize * 0.18;
-  }
-
   Vector2 _cellCenter(GridBoard board, int row, int col) {
     final stride = board.cellSize + board.gap;
     return board.absolutePosition +
@@ -335,48 +349,11 @@ class WaveManager extends Component {
         );
   }
 
-  int _breachDamageFor(String type) {
-    switch (type) {
-      case 'orc':
-        return 15;
-      case 'troll':
-        return 25;
-      case 'dark_knight':
-        return 30;
-      case 'boss_dragon':
-        return 50;
-      case 'goblin':
-      default:
-        return 10;
-    }
-  }
-
-  void enemyReachedFort(BaseEnemy enemy, int damage) {
-    if (_gameOver) {
-      return;
-    }
-
-    enemy.isAlive = false;
-    enemy.removeFromParent();
-
-    _fortHp = (_fortHp - damage).clamp(0, fortMaxHp);
-    _fortComponent?.takeDamage(damage);
-    GameState.instance.updateFortHp(_fortHp, maxHp: fortMaxHp);
-    AudioManager.instance.playFortHit();
-    _aliveEnemyCount = (_aliveEnemyCount - 1).clamp(0, 999999);
-
-    if (_fortHp == 0) {
-      _gameOver = true;
-      _waveActive = false;
-      _nextWaveDelay = 0;
-      onGameOver();
-    }
-  }
-
   void enemyKilled() {
     _aliveEnemyCount = (_aliveEnemyCount - 1).clamp(0, 999999);
     final goldReward = 5 + SkillSystem.instance.bonusGoldPerKill;
     GameState.instance.addGold(goldReward);
+    GameState.instance.addEnemyKill();
     AudioManager.instance.playEnemyDeathSmall();
   }
 

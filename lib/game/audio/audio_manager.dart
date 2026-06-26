@@ -1,4 +1,5 @@
 import 'package:flame_audio/flame_audio.dart';
+import 'package:flutter/foundation.dart';
 
 /// Central audio manager for Fort Guardian.
 /// All audio interactions go through this singleton.
@@ -9,6 +10,9 @@ class AudioManager {
 
   bool _initialized = false;
   String? _currentBgm;
+  // On web, BGM autoplay is blocked until user interaction.
+  // We store a pending track and play it on first pointer event.
+  String? _pendingBgm;
 
   // BGM track names (under assets/audio/bgm/)
   static const String bgmMainMenu = 'bgm/main_menu.mp3';
@@ -31,40 +35,82 @@ class AudioManager {
   /// Call once during game initialization to pre-cache all audio files.
   Future<void> initialize() async {
     if (_initialized) return;
-    await FlameAudio.audioCache.loadAll([
-      bgmMainMenu,
-      bgmGameplay,
-      bgmVictory,
-      bgmGameOver,
-      sfxArrowShoot,
-      sfxCannonFire,
-      sfxEnemyDeathSmall,
-      sfxEnemyDeathLarge,
-      sfxMergeSuccess,
-      sfxSkillSelect,
-      sfxTowerPlace,
-      sfxFortHit,
-      sfxGameOver,
-      sfxWaveComplete,
-    ]);
+    try {
+      await FlameAudio.audioCache.loadAll([
+        bgmMainMenu,
+        bgmGameplay,
+        bgmVictory,
+        bgmGameOver,
+        sfxArrowShoot,
+        sfxCannonFire,
+        sfxEnemyDeathSmall,
+        sfxEnemyDeathLarge,
+        sfxMergeSuccess,
+        sfxSkillSelect,
+        sfxTowerPlace,
+        sfxFortHit,
+        sfxGameOver,
+        sfxWaveComplete,
+      ]);
+    } catch (_) {
+      // Audio pre-cache may fail on web before user interaction; ignore.
+    }
     _initialized = true;
+  }
+
+  /// On web, browsers block audio autoplay until the user has interacted.
+  /// Call this after the first pointer-down event to unblock pending BGM.
+  Future<void> onUserInteraction() async {
+    final pending = _pendingBgm;
+    if (pending == null) return;
+    await _playBgmDirect(pending);
   }
 
   Future<void> playBgm(String trackName) async {
     if (_currentBgm == trackName) return;
     await stopBgm();
-    await FlameAudio.bgm.play(trackName, volume: 0.6);
-    _currentBgm = trackName;
+    // On web, defer BGM until user interaction to satisfy autoplay policy.
+    if (kIsWeb) {
+      _pendingBgm = trackName;
+      return;
+    }
+    try {
+      await FlameAudio.bgm.play(trackName, volume: 0.6);
+      _currentBgm = trackName;
+    } catch (_) {
+      // Ignore audio errors (e.g., autoplay blocked).
+    }
+  }
+
+  Future<void> _playBgmDirect(String trackName) async {
+    try {
+      await FlameAudio.bgm.play(trackName, volume: 0.6);
+      _currentBgm = trackName;
+      _pendingBgm = null;
+    } catch (_) {
+      // Ignore audio errors.
+    }
   }
 
   Future<void> stopBgm() async {
-    await FlameAudio.bgm.stop();
+    _pendingBgm = null;
+    try {
+      await FlameAudio.bgm.stop();
+    } catch (_) {}
     _currentBgm = null;
   }
 
-  void pauseBgm() => FlameAudio.bgm.pause();
+  void pauseBgm() {
+    try {
+      FlameAudio.bgm.pause();
+    } catch (_) {}
+  }
 
-  void resumeBgm() => FlameAudio.bgm.resume();
+  void resumeBgm() {
+    try {
+      FlameAudio.bgm.resume();
+    } catch (_) {}
+  }
 
   Future<void> onMainMenu() => playBgm(bgmMainMenu);
 
@@ -80,7 +126,9 @@ class AudioManager {
 
   /// Play a short sound effect (fire-and-forget).
   void playSfx(String sfxName, {double volume = 1.0}) {
-    FlameAudio.play(sfxName, volume: volume);
+    try {
+      FlameAudio.play(sfxName, volume: volume);
+    } catch (_) {}
   }
 
   void playArrowShoot() => playSfx(sfxArrowShoot, volume: 0.7);

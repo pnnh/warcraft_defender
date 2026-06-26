@@ -18,6 +18,12 @@ class BossDragonEnemy extends BaseEnemy with EnemyMover {
   String get spriteKey => 'boss_dragon';
 
   @override
+  double get fortAttackDamage => 40.0;
+
+  @override
+  double get fortAttackInterval => 1.0;
+
+  @override
   void update(double dt) {
     super.update(dt);
     updateMovement(dt);

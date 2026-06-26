@@ -10,12 +10,14 @@ class GameState extends ChangeNotifier {
   int _fortMaxHp = 100;
   int _gold = 150;
   double _speed = 1.0;
+  int _enemiesKilled = 0;
 
   int get wave => _wave;
   int get fortHp => _fortHp;
   int get fortMaxHp => _fortMaxHp;
   int get gold => _gold;
   double get speed => _speed;
+  int get enemiesKilled => _enemiesKilled;
 
   void updateWave(int wave) {
     _wave = wave;
@@ -47,6 +49,11 @@ class GameState extends ChangeNotifier {
 
   void setSpeed(double speed) {
     _speed = speed;
+    notifyListeners();
+  }
+
+  void addEnemyKill() {
+    _enemiesKilled += 1;
     notifyListeners();
   }
 }

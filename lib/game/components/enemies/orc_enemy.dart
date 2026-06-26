@@ -16,6 +16,12 @@ class OrcEnemy extends BaseEnemy with EnemyMover {
   String get spriteKey => 'orc';
 
   @override
+  double get fortAttackDamage => 15.0;
+
+  @override
+  double get fortAttackInterval => 1.5;
+
+  @override
   void update(double dt) {
     super.update(dt);
     updateMovement(dt);

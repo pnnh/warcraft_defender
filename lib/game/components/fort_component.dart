@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 
+import 'enemies/base_enemy.dart';
+import 'projectiles/arrow_projectile.dart';
+
 class FortComponent extends PositionComponent {
   FortComponent({required this.maxHp}) : _hp = maxHp {
     size = Vector2.all(80);
@@ -12,6 +15,14 @@ class FortComponent extends PositionComponent {
   int _hp;
   double _hitFlash = 0;
   Sprite? _fortSprite;
+
+  /// Injected by WaveManager so the fort can find enemies to shoot.
+  List<BaseEnemy> Function()? getEnemies;
+
+  static const double _attackRange = 210.0;
+  static const double _attackDamage = 20.0;
+  static const double _attackCooldown = 1.8;
+  double _cooldownTimer = 0;
 
   int get hp => _hp;
 
@@ -34,6 +45,32 @@ class FortComponent extends PositionComponent {
     super.update(dt);
     if (_hitFlash > 0) {
       _hitFlash = (_hitFlash - dt).clamp(0, 0.3);
+    }
+    _tickAttack(dt);
+  }
+
+  void _tickAttack(double dt) {
+    _cooldownTimer -= dt;
+    if (_cooldownTimer > 0) return;
+
+    final enemies = getEnemies?.call() ?? const [];
+    BaseEnemy? nearest;
+    var nearestDist = double.infinity;
+    for (final enemy in enemies) {
+      if (!enemy.isAlive) continue;
+      final dist = enemy.absoluteCenter.distanceTo(absoluteCenter);
+      if (dist <= _attackRange && dist < nearestDist) {
+        nearestDist = dist;
+        nearest = enemy;
+      }
+    }
+    if (nearest == null) return;
+
+    _cooldownTimer = _attackCooldown;
+    final arrow = ArrowProjectile.acquire()..configure(damage: _attackDamage);
+    arrow.launch(target: nearest, from: position + size * 0.5);
+    if (arrow.parent == null) {
+      parent?.add(arrow);
     }
   }
 

@@ -14,6 +14,19 @@ abstract class BaseEnemy extends PositionComponent {
   double pathProgress = 0;
   bool isAlive = true;
 
+  // Fort attack state – set to true by WaveManager when enemy reaches the fort.
+  bool isAttackingFort = false;
+  double _fortAttackTimer = 0;
+
+  /// Called each time the enemy deals a hit to the fort. Wired by WaveManager.
+  void Function(int damage)? onAttackFort;
+
+  /// Damage dealt to the fort per hit. Override per subclass.
+  double get fortAttackDamage => 8.0;
+
+  /// Seconds between hits. Override per subclass.
+  double get fortAttackInterval => 1.5;
+
   // Grid movement – populated by WaveManager, consumed by EnemyMover.
   GridBoard? gridBoard;
   (int, int)? entryCell;
@@ -90,6 +103,17 @@ abstract class BaseEnemy extends PositionComponent {
     super.update(dt);
     _walkTicker?.update(dt);
     _deathTicker?.update(dt);
+    updateFortAttack(dt);
+  }
+
+  /// Tick the fort-attack timer; fires damage callback when interval elapses.
+  void updateFortAttack(double dt) {
+    if (!isAttackingFort || !isAlive) return;
+    _fortAttackTimer += dt;
+    if (_fortAttackTimer >= fortAttackInterval) {
+      _fortAttackTimer = 0;
+      onAttackFort?.call(fortAttackDamage.round());
+    }
   }
 
   /// Called after entryCell/fortCell/gridBoard are set to calculate the path.
