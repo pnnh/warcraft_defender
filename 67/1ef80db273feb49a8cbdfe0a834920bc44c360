@@ -1,0 +1,32 @@
+lib/game/components/enemies/enemy_mover.dart
+  s_f1b71e9df1145c::t_3de655f2e56725 94,96,100
+lib/main.dart
+  s_f1b71e9df1145c::t_3de655f2e56725 2,11-14
+lib/game/systems/wave_manager.dart
+  h_6465a203f88bd5 248-252,302-304,320-321,390,396-397
+lib/game/components/grid/grid_board.dart
+  s_f1b71e9df1145c::t_3de655f2e56725 11-12
+lib/game/fort_game.dart
+  s_f1b71e9df1145c::t_26bfbc479ca36b 162-165,168-174
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "671ef80db273feb49a8cbdfe0a834920bc44c360",
+  "prompts": {},
+  "humans": {
+    "h_6465a203f88bd5": {
+      "author": "larry <xspanni@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_f1b71e9df1145c": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "1216775f-5c60-460f-8d4a-c5c16d601a5b",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
