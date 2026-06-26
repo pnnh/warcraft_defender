@@ -1,0 +1,98 @@
+lib/ui/widgets/skill_select_overlay.dart
+  s_f1b71e9df1145c::t_87fbb65e042acd 5-7
+  s_f1b71e9df1145c::t_82b6f36208d074 34-39
+lib/game/components/enemies/orc_enemy.dart
+  s_f1b71e9df1145c::t_eef403a29f827d 1-15,19-26,37-45
+  s_f1b71e9df1145c::t_c9cc116aa31ac4 16-18,27-36
+lib/game/components/enemies/boss_dragon_enemy.dart
+  s_f1b71e9df1145c::t_b7c6b8859be006 18-20,30-47,52
+  s_f1b71e9df1145c::t_c1a06c7c9eac91 1-17,21-29,48-51,53-54
+.beads/interactions.jsonl
+  s_f1b71e9df1145c::t_43e5093fab063f 26
+  s_f1b71e9df1145c::t_05b77fa2ca8428 28
+  s_f1b71e9df1145c::t_af06b46595911b 30
+  s_f1b71e9df1145c::t_c97a0a1ffd83ad 27
+  s_f1b71e9df1145c::t_32d537b086de41 31
+  s_f1b71e9df1145c::t_b8016b19df4f2d 29
+lib/game/fort_game.dart
+  s_f1b71e9df1145c::t_d62f46f02d4dd8 253-259,262
+  s_f1b71e9df1145c::t_b29b75417912ed 11-13,272-275,277,281-289
+  s_f1b71e9df1145c::t_20012c072b9fc4 217
+  s_f1b71e9df1145c::t_eb03d4f1c422fc 15,31,204-216,218-225
+  s_f1b71e9df1145c::t_c7e419055923e0 290-291
+.beads/issues.jsonl
+  s_f1b71e9df1145c::t_05b77fa2ca8428 1
+  s_f1b71e9df1145c::t_b8016b19df4f2d 19
+  s_f1b71e9df1145c::t_43e5093fab063f 3
+  s_f1b71e9df1145c::t_af06b46595911b 18
+  s_f1b71e9df1145c::t_32d537b086de41 29
+  s_f1b71e9df1145c::t_c97a0a1ffd83ad 2
+  s_e0a7f5c41fca58::t_9d7aa477b3bfb8 31
+lib/game/components/towers/magic_tower.dart
+  s_f1b71e9df1145c::t_253975169fd2e9 59-64
+lib/game/components/enemies/goblin_enemy.dart
+  s_f1b71e9df1145c::t_b7c6b8859be006 16-17,27-32,34-39
+  s_f1b71e9df1145c::t_7221ffb9ae16af 15
+lib/game/components/grid/grid_cell.dart
+  s_f1b71e9df1145c::t_f1472ddc915769 55-72
+  s_f1b71e9df1145c::t_8b73f58feee4ed 35
+  s_f1b71e9df1145c::t_90eecf235b1922 5
+  s_f1b71e9df1145c::t_99da1c5ec0d9d0 37-48
+  s_f1b71e9df1145c::t_062ecdc26f472d 7
+  s_f1b71e9df1145c::t_f495654f87d52b 6
+  s_f1b71e9df1145c::t_56f510732e5da6 36
+lib/game/components/towers/base_tower.dart
+  s_f1b71e9df1145c::t_b98db32da55dbd 2,41-43,47-58
+  s_f1b71e9df1145c::t_acd0005beaa865 59
+lib/game/components/enemies/enemy_mover.dart
+  s_f1b71e9df1145c::t_08b775e5172c54 9
+  s_f1b71e9df1145c::t_1ed031f0e5ffdf 17
+lib/game/components/towers/cannon_tower.dart
+  s_f1b71e9df1145c::t_253975169fd2e9 47-52
+lib/game/components/enemies/troll_enemy.dart
+  s_f1b71e9df1145c::t_027deac6b0b69c 1-15,19-26,35-38,40-41
+  s_f1b71e9df1145c::t_b7c6b8859be006 16-18,27-34,39
+.vscode/settings.json
+  s_f1b71e9df1145c::t_63d65b4e2f682a 4-5
+  s_f1b71e9df1145c::t_45887454923048 1-3,6-7
+lib/game/systems/wave_manager.dart
+  s_f1b71e9df1145c::t_232153a40f21f3 9-12,230-244
+lib/game/components/fort_component.dart
+  s_f1b71e9df1145c::t_3726445369d934 4,14,18-26,44-62
+lib/game/components/enemies/dark_knight_enemy.dart
+  s_f1b71e9df1145c::t_6f5568972d04fb 1-15,19-26,35-38,40-41
+  s_f1b71e9df1145c::t_b7c6b8859be006 16-18,27-34,39
+lib/game/components/towers/archer_tower.dart
+  s_f1b71e9df1145c::t_253975169fd2e9 29-34
+lib/game/components/grid/grid_board.dart
+  s_f1b71e9df1145c::t_83713134bf3c1b 60-62
+lib/game/components/enemies/base_enemy.dart
+  s_f1b71e9df1145c::t_6e56260998dc2f 2,20-43
+  s_f1b71e9df1145c::t_08b775e5172c54 4,16-19,44-46
+  s_f1b71e9df1145c::t_7f5ad72c0b5f79 3
+  s_f1b71e9df1145c::t_546f96fb43d7f8 47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "736bae434e37a0d6ee29580614f995ccc597c768",
+  "prompts": {},
+  "sessions": {
+    "s_e0a7f5c41fca58": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a9b51b44-0a53-4db6-a45e-d331f119a3c4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_f1b71e9df1145c": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "1216775f-5c60-460f-8d4a-c5c16d601a5b",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
