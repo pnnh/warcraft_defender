@@ -3,10 +3,11 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 import '../../game/fort_game.dart';
-import '../../game/components/grid/grid_board.dart';
+import '../../game/audio/audio_manager.dart';
+import '../../game/game_state.dart';
 import '../../game/components/towers/base_tower.dart';
 import '../../game/systems/skill_system.dart';
-import '../../game/systems/wave_manager.dart';
+import 'game_over_screen.dart';
 import '../widgets/hud_overlay.dart';
 import '../widgets/skill_select_overlay.dart';
 
@@ -20,7 +21,6 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   late final FortGame _game;
-  bool _waveManagerAttached = false;
 
   @override
   void initState() {
@@ -28,7 +28,6 @@ class _GameScreenState extends State<GameScreen> {
     SkillSystem.instance.reset();
     SkillSystem.instance.selectionListenable.addListener(_handleSelectionState);
     _game = FortGame();
-    _attachWaveManager();
   }
 
   @override
@@ -37,35 +36,6 @@ class _GameScreenState extends State<GameScreen> {
       _handleSelectionState,
     );
     super.dispose();
-  }
-
-  Future<void> _attachWaveManager() async {
-    while (mounted && !_game.isLoaded) {
-      await Future<void>.delayed(const Duration(milliseconds: 50));
-    }
-
-    if (!mounted || _waveManagerAttached) {
-      return;
-    }
-
-    GridBoard? gridBoard;
-    for (final component in _walkComponents(_game)) {
-      if (component is GridBoard) {
-        gridBoard = component;
-        break;
-      }
-    }
-
-    await _game.add(
-      WaveManager(
-        gridBoard: gridBoard,
-        onGameOver: () {},
-        onWaveComplete: (wave) {
-          SkillSystem.instance.requestSelection(wave: wave);
-        },
-      ),
-    );
-    _waveManagerAttached = true;
   }
 
   void _handleSelectionState() {
@@ -91,6 +61,37 @@ class _GameScreenState extends State<GameScreen> {
         initialActiveOverlays: const <String>['hud'],
         overlayBuilderMap: {
           'hud': (context, game) => const HudOverlay(),
+          'gameOver': (context, game) => GameOverScreen(
+            wavesReached: GameState.instance.wave,
+            goldEarned: GameState.instance.gold,
+            onRetry: () {
+              game.overlays.remove('gameOver');
+              AudioManager.instance.onGameplayStart();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const GameScreen()),
+              );
+            },
+            onMenu: () {
+              game.overlays.remove('gameOver');
+              AudioManager.instance.stopBgm();
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            },
+          ),
+          'victory': (context, game) => VictoryScreen(
+            goldEarned: GameState.instance.gold,
+            onRetry: () {
+              game.overlays.remove('victory');
+              AudioManager.instance.onGameplayStart();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const GameScreen()),
+              );
+            },
+            onMenu: () {
+              game.overlays.remove('victory');
+              AudioManager.instance.stopBgm();
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            },
+          ),
           'skillSelect': (context, game) {
             final selection = SkillSystem.instance.pendingSelection;
             if (selection == null) {

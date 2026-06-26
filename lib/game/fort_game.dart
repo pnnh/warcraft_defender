@@ -9,6 +9,8 @@ import 'components/grid/grid_board.dart';
 import 'components/grid/grid_cell.dart';
 import 'components/towers/archer_tower.dart';
 import 'components/ui/tower_palette.dart';
+import 'systems/skill_system.dart';
+import 'systems/wave_manager.dart';
 
 /// Main FlameGame entry point for Fort Guardian.
 /// Orchestrates all game systems: grid, waves, skills, and combat.
@@ -17,6 +19,8 @@ class FortGame extends FlameGame with HasTimeScale {
 
   late final GridBoard _grid;
   late final TowerPalette _towerPalette;
+  late final VoidCallback _gameStateListener;
+  late final WaveManager _waveManager;
 
   _DragPlacementState? _dragPlacement;
   int gold = startingGold;
@@ -26,6 +30,16 @@ class FortGame extends FlameGame with HasTimeScale {
     await super.onLoad();
     await AudioManager.instance.initialize();
     await AudioManager.instance.onGameplayStart();
+
+    gold = startingGold;
+    _gameStateListener = () {
+      timeScale = GameState.instance.speed;
+    };
+    GameState.instance.addListener(_gameStateListener);
+    GameState.instance.updateWave(0);
+    GameState.instance.updateFortHp(100, maxHp: 100);
+    GameState.instance.setSpeed(1.0);
+    _syncGoldState();
 
     _grid = GridBoard();
     _towerPalette = TowerPalette(
@@ -38,10 +52,31 @@ class FortGame extends FlameGame with HasTimeScale {
 
     await add(_grid);
     await add(_towerPalette);
+    _waveManager = WaveManager(
+      gridBoard: _grid,
+      onGameOver: () {
+        AudioManager.instance.onGameOver();
+        GameState.instance.updateFortHp(0);
+        pauseEngine();
+        overlays.add('gameOver');
+      },
+      onWaveComplete: (wave) {
+        GameState.instance.updateWave(wave);
+        if (wave >= 20) {
+          AudioManager.instance.onVictory();
+          pauseEngine();
+          overlays.add('victory');
+          return;
+        }
+
+        SkillSystem.instance.requestSelection(wave: wave);
+        pauseEngine();
+        overlays.add('skillSelect');
+      },
+    );
+    await add(_waveManager);
     _positionComponents();
-    GameState.instance.addListener(() {
-      timeScale = GameState.instance.speed;
-    });
+    timeScale = GameState.instance.speed;
   }
 
   @override
@@ -51,6 +86,29 @@ class FortGame extends FlameGame with HasTimeScale {
     if (isLoaded) {
       _positionComponents();
     }
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    if (!isLoaded) {
+      return;
+    }
+
+    if (GameState.instance.wave != _waveManager.currentWave) {
+      GameState.instance.updateWave(_waveManager.currentWave);
+    }
+
+    if (GameState.instance.fortHp != _waveManager.fortHp) {
+      GameState.instance.updateFortHp(_waveManager.fortHp);
+    }
+  }
+
+  @override
+  void onRemove() {
+    GameState.instance.removeListener(_gameStateListener);
+    super.onRemove();
   }
 
   @override
@@ -98,11 +156,11 @@ class FortGame extends FlameGame with HasTimeScale {
   void _positionComponents() {
     final paletteX = (size.x - _towerPalette.size.x) / 2;
     final paletteY = size.y - _towerPalette.size.y - 24;
-    final maxGridY = (paletteY - _grid.size.y - 24).clamp(24.0, double.infinity);
-    final centeredGridY = ((paletteY - _grid.size.y) / 2).clamp(
+    final maxGridY = (paletteY - _grid.size.y - 24).clamp(
       24.0,
-      maxGridY,
+      double.infinity,
     );
+    final centeredGridY = ((paletteY - _grid.size.y) / 2).clamp(24.0, maxGridY);
 
     _grid.position = Vector2(
       (size.x - _grid.size.x) / 2,
@@ -146,6 +204,7 @@ class FortGame extends FlameGame with HasTimeScale {
     if (canPlace) {
       _placeTower(targetCell, entry);
       gold -= dragPlacement.entry.cost;
+      _syncGoldState();
     }
 
     _clearDragPlacement();
@@ -176,13 +235,15 @@ class FortGame extends FlameGame with HasTimeScale {
     _grid.setOccupied(cell.row, cell.col, true);
 
     final towerSize = _grid.cellSize * 0.72;
-    final tower = ArcherTower(
-      towerType: entry.id,
-      fillColor: entry.fillColor,
-      accentColor: entry.accentColor,
-    )
-      ..size = Vector2.all(towerSize)
-      ..position = cell.position + Vector2.all((_grid.cellSize - towerSize) / 2);
+    final tower =
+        ArcherTower(
+            towerType: entry.id,
+            fillColor: entry.fillColor,
+            accentColor: entry.accentColor,
+          )
+          ..size = Vector2.all(towerSize)
+          ..position =
+              cell.position + Vector2.all((_grid.cellSize - towerSize) / 2);
 
     _grid.add(tower);
   }
@@ -190,6 +251,18 @@ class FortGame extends FlameGame with HasTimeScale {
   void _clearDragPlacement() {
     _grid.clearGhostCell();
     _dragPlacement = null;
+  }
+
+  void _syncGoldState() {
+    final delta = gold - GameState.instance.gold;
+    if (delta > 0) {
+      GameState.instance.addGold(delta);
+      return;
+    }
+
+    if (delta < 0) {
+      GameState.instance.spendGold(-delta);
+    }
   }
 }
 
