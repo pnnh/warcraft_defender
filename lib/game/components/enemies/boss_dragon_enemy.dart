@@ -7,11 +7,9 @@ import 'base_enemy.dart';
 import 'enemy_mover.dart';
 
 class BossDragonEnemy extends BaseEnemy with EnemyMover {
-  BossDragonEnemy() : _maxHealth = 1200, super(health: 1200, speed: 50) {
+  BossDragonEnemy() : super(health: 1200, speed: 50) {
     size = Vector2.all(56);
   }
-
-  final double _maxHealth;
   double _wingPhase = 0;
 
   @override
@@ -51,10 +49,6 @@ class BossDragonEnemy extends BaseEnemy with EnemyMover {
       canvas.drawCircle(Offset(size.x * 0.65, size.y * 0.35), 5,
           Paint()..color = const Color(0xFFFF8800));
     }
-    final hpRatio = (health / _maxHealth).clamp(0.0, 1.0);
-    canvas.drawRect(Rect.fromLTWH(0, -10, size.x * hpRatio, 6),
-        Paint()..color = const Color(0xFFFF2200));
-    canvas.drawRect(Rect.fromLTWH(0, -10, size.x, 6),
-        Paint()..color = const Color(0xFFFFFFFF)..style = PaintingStyle.stroke);
+    // HP bar hidden intentionally.
   }
 }

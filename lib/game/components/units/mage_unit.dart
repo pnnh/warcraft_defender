@@ -16,7 +16,7 @@ class MageUnit extends BaseUnit {
         attackRange: 130,
         attackCooldown: 2.0,
       ) {
-    size = Vector2.all(36);
+    size = Vector2.all(56);
     anchor = Anchor.center;
   }
 

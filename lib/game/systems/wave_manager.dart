@@ -64,7 +64,7 @@ class WaveManager extends Component {
     required this.onGameOver,
     required this.onWaveComplete,
     this.gridBoard,
-    this.fortMaxHp = 100,
+    this.fortMaxHp = 10000,
   }) : _fortHp = fortMaxHp;
 
   final void Function() onGameOver;

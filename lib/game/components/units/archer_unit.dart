@@ -16,7 +16,7 @@ class ArcherUnit extends BaseUnit {
         attackRange: 160,
         attackCooldown: 1.2,
       ) {
-    size = Vector2.all(36);
+    size = Vector2.all(56);
     anchor = Anchor.center;
   }
 

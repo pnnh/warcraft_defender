@@ -42,7 +42,7 @@ class FortGame extends FlameGame with HasTimeScale {
     };
     GameState.instance.addListener(_gameStateListener);
     GameState.instance.updateWave(0);
-    GameState.instance.updateFortHp(100, maxHp: 100);
+    GameState.instance.updateFortHp(10000, maxHp: 10000);
     GameState.instance.setSpeed(1.0);
     _syncGoldState();
 

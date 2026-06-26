@@ -124,17 +124,6 @@ abstract class BaseUnit extends PositionComponent {
       canvas.drawOval(size.toRect(), Paint()..color = fallbackColor);
     }
 
-    // HP bar
-    final hpRatio = (health / maxHealth).clamp(0.0, 1.0);
-    canvas.drawRect(
-      Rect.fromLTWH(0, -7, size.x * hpRatio, 4),
-      Paint()..color = const Color(0xFF44FF44),
-    );
-    canvas.drawRect(
-      Rect.fromLTWH(0, -7, size.x, 4),
-      Paint()
-        ..color = const Color(0xFF333333)
-        ..style = PaintingStyle.stroke,
-    );
+    // HP bar hidden intentionally.
   }
 }

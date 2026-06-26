@@ -6,8 +6,8 @@ class GameState extends ChangeNotifier {
   static final GameState instance = GameState._();
 
   int _wave = 0;
-  int _fortHp = 100;
-  int _fortMaxHp = 100;
+  int _fortHp = 1000;
+  int _fortMaxHp = 5000;
   int _gold = 150;
   double _speed = 1.0;
   int _enemiesKilled = 0;
