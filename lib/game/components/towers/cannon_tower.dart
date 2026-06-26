@@ -44,7 +44,12 @@ class CannonTower extends BaseTower {
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-
+    final s = sprite;
+    if (s != null) {
+      s.render(canvas, size: size);
+      return;
+    }
+    // Geometry fallback
     final basePaint = Paint()
       ..color = _flashTimer > 0
           ? const Color(0xFFFFFFFF)
@@ -53,7 +58,6 @@ class CannonTower extends BaseTower {
       RRect.fromRectAndRadius(size.toRect(), const Radius.circular(4)),
       basePaint,
     );
-
     final barrelPaint = Paint()..color = const Color(0xFF333333);
     canvas.drawRect(
       Rect.fromCenter(

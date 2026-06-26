@@ -1,4 +1,5 @@
 import 'package:flame/components.dart';
+import 'package:flame/flame.dart';
 
 import '../enemies/base_enemy.dart';
 import '../../systems/skill_system.dart';
@@ -37,8 +38,24 @@ abstract class BaseTower extends PositionComponent implements SkillTarget {
   @override
   double splashDamageMultiplier = 0.0;
 
+  /// Loaded sprite for this tower (null = fall back to geometry rendering).
+  Sprite? sprite;
+
   double _cooldownRemaining = 0;
   BaseEnemy? _currentTarget;
+
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+    final clampedLevel = level.clamp(1, 3);
+    try {
+      final image = await Flame.images
+          .load('sprites/towers/${type}_tower_l$clampedLevel.png');
+      sprite = Sprite(image);
+    } catch (_) {
+      // Asset missing – geometry fallback remains active.
+    }
+  }
 
   void buffDamage(double fraction) {
     attackDamage *= 1 + fraction;

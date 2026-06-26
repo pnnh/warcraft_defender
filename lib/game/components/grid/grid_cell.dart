@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame/flame.dart';
+
+import '../towers/base_tower.dart';
 
 /// A single cell in the defense grid.
 class GridCell extends PositionComponent with TapCallbacks {
@@ -29,22 +32,44 @@ class GridCell extends PositionComponent with TapCallbacks {
   bool isOccupied = false;
   bool isGhosted = false;
   bool isGhostValid = true;
+  BaseTower? occupyingTower;
+
+  static Sprite? _tileSprite;
+
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+    if (_tileSprite == null) {
+      try {
+        final img = await Flame.images.load('tilemaps/grid_tile.png');
+        _tileSprite = Sprite(img);
+      } catch (_) {}
+    }
+  }
 
   @override
   void render(Canvas canvas) {
     super.render(canvas);
 
     final rect = size.toRect();
-    final fillPaint = Paint()
-      ..color = isOccupied ? _occupiedFillColor : _emptyFillColor
-      ..style = PaintingStyle.fill;
-    final borderPaint = Paint()
-      ..color = isOccupied ? _occupiedBorderColor : _emptyBorderColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-
-    canvas.drawRect(rect, fillPaint);
-    canvas.drawRect(rect, borderPaint);
+    final tile = _tileSprite;
+    if (tile != null && !isGhosted) {
+      tile.render(canvas, size: size);
+      if (isOccupied) {
+        canvas.drawRect(rect,
+            Paint()..color = const Color(0x441AFF1A)..style = PaintingStyle.fill);
+      }
+    } else {
+      final fillPaint = Paint()
+        ..color = isOccupied ? _occupiedFillColor : _emptyFillColor
+        ..style = PaintingStyle.fill;
+      final borderPaint = Paint()
+        ..color = isOccupied ? _occupiedBorderColor : _emptyBorderColor
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2;
+      canvas.drawRect(rect, fillPaint);
+      canvas.drawRect(rect, borderPaint);
+    }
 
     if (isGhosted) {
       final ghostFillPaint = Paint()
@@ -55,7 +80,6 @@ class GridCell extends PositionComponent with TapCallbacks {
             isGhostValid ? _ghostValidBorderColor : _ghostInvalidBorderColor
         ..style = PaintingStyle.stroke
         ..strokeWidth = 3;
-
       canvas.drawRect(rect, ghostFillPaint);
       canvas.drawRect(rect, ghostBorderPaint);
     }

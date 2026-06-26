@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../game/systems/skill_system.dart';
 
+// Silently ignore missing skill_card_bg.png so the geometry fallback shows.
+void _ignoreImageError(Object error, StackTrace? stack) {}
+
 class SkillSelectOverlay extends StatefulWidget {
   const SkillSelectOverlay({
     super.key,
@@ -26,9 +29,14 @@ class _SkillSelectOverlayState extends State<SkillSelectOverlay> {
           constraints: const BoxConstraints(maxWidth: 500),
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: const Color(0xFF1A1A2E),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: const Color(0xFFFFD700), width: 2),
+            image: const DecorationImage(
+              image: AssetImage('assets/images/sprites/ui/skill_card_bg.png'),
+              fit: BoxFit.cover,
+              onError: _ignoreImageError,
+            ),
+            color: const Color(0xFF1A1A2E), // fallback if asset missing
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,

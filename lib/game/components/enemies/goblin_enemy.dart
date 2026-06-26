@@ -13,6 +13,9 @@ class GoblinEnemy extends BaseEnemy with EnemyMover {
   final double _maxHealth;
 
   @override
+  String get spriteKey => 'goblin';
+
+  @override
   void update(double dt) {
     super.update(dt);
     updateMovement(dt);
@@ -21,20 +24,18 @@ class GoblinEnemy extends BaseEnemy with EnemyMover {
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-
-    final bodyPaint = Paint()..color = const Color(0xFF22AA22);
-    canvas.drawOval(size.toRect(), bodyPaint);
-
+    final s = walkSprite;
+    if (s != null) {
+      s.render(canvas, size: size);
+    } else {
+      canvas.drawOval(size.toRect(), Paint()..color = const Color(0xFF22AA22));
+    }
     final hpRatio = (health / _maxHealth).clamp(0.0, 1.0);
-    canvas.drawRect(
-      Rect.fromLTWH(0, -8, size.x * hpRatio, 4),
-      Paint()..color = const Color(0xFF00FF00),
-    );
-    canvas.drawRect(
-      Rect.fromLTWH(0, -8, size.x, 4),
-      Paint()
-        ..color = const Color(0xFF333333)
-        ..style = PaintingStyle.stroke,
-    );
+    canvas.drawRect(Rect.fromLTWH(0, -8, size.x * hpRatio, 4),
+        Paint()..color = const Color(0xFF00FF00));
+    canvas.drawRect(Rect.fromLTWH(0, -8, size.x, 4),
+        Paint()
+          ..color = const Color(0xFF333333)
+          ..style = PaintingStyle.stroke);
   }
 }

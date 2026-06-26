@@ -6,9 +6,7 @@ import 'base_enemy.dart';
 
 /// Mixin that gives a [BaseEnemy] the ability to follow a grid-based A* path.
 mixin EnemyMover on BaseEnemy {
-  GridBoard? gridBoard;
-  (int, int)? entryCell;
-  (int, int)? fortCell;
+  // gridBoard, entryCell, fortCell are declared in BaseEnemy
 
   final List<(int, int)> _path = <(int, int)>[];
   int _pathIndex = 0;
@@ -16,6 +14,7 @@ mixin EnemyMover on BaseEnemy {
 
   double distanceTraveled = 0;
 
+  @override
   void calculatePath() {
     final board = gridBoard;
     if (board == null) {

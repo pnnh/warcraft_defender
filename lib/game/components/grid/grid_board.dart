@@ -57,6 +57,9 @@ class GridBoard extends PositionComponent {
     }
 
     cell.isOccupied = occupied;
+    if (!occupied) {
+      cell.occupyingTower = null;
+    }
   }
 
   GridCell? cellAtCanvasPosition(Vector2 canvasPosition) {

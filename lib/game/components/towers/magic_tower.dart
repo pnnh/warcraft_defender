@@ -56,7 +56,12 @@ class MagicTower extends BaseTower {
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-
+    final s = sprite;
+    if (s != null) {
+      s.render(canvas, size: size);
+      return;
+    }
+    // Geometry fallback
     final basePaint = Paint()
       ..color = _flashTimer > 0
           ? const Color(0xFFAA88FF)
@@ -65,10 +70,8 @@ class MagicTower extends BaseTower {
       RRect.fromRectAndRadius(size.toRect(), const Radius.circular(4)),
       basePaint,
     );
-
     final orbPaint = Paint()..color = const Color(0xFFBB66FF);
     canvas.drawCircle(Offset(size.x / 2, size.y / 2), 12, orbPaint);
-
     for (var i = 0; i < level && i < 5; i++) {
       canvas.drawCircle(
         Offset(6.0 + (i * 10.0), size.y - 8),

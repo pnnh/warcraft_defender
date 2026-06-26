@@ -6,6 +6,10 @@ import 'package:flutter/services.dart';
 import '../audio/audio_manager.dart';
 import '../components/enemies/base_enemy.dart';
 import '../components/enemies/goblin_enemy.dart';
+import '../components/enemies/orc_enemy.dart';
+import '../components/enemies/troll_enemy.dart';
+import '../components/enemies/dark_knight_enemy.dart';
+import '../components/enemies/boss_dragon_enemy.dart';
 import '../components/fort_component.dart';
 import '../components/grid/grid_board.dart';
 import '../game_state.dart';
@@ -223,9 +227,21 @@ class WaveManager extends Component {
   }
 
   BaseEnemy _createEnemy(_PendingSpawn spawn) {
-    final enemy = GoblinEnemy()
-      ..health *= spawn.healthMult
-      ..speed *= spawn.speedMult;
+    final BaseEnemy enemy;
+    switch (spawn.type) {
+      case 'orc':
+        enemy = OrcEnemy();
+      case 'troll':
+        enemy = TrollEnemy();
+      case 'dark_knight':
+        enemy = DarkKnightEnemy();
+      case 'boss_dragon':
+        enemy = BossDragonEnemy();
+      default:
+        enemy = GoblinEnemy();
+    }
+    enemy.health *= spawn.healthMult;
+    enemy.speed *= spawn.speedMult;
 
     final board = gridBoard;
     if (board != null) {

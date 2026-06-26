@@ -8,7 +8,11 @@ import 'audio/audio_manager.dart';
 import 'components/grid/grid_board.dart';
 import 'components/grid/grid_cell.dart';
 import 'components/towers/archer_tower.dart';
+import 'components/towers/base_tower.dart';
+import 'components/towers/cannon_tower.dart';
+import 'components/towers/magic_tower.dart';
 import 'components/ui/tower_palette.dart';
+import 'systems/merge_system.dart';
 import 'systems/skill_system.dart';
 import 'systems/wave_manager.dart';
 
@@ -24,6 +28,7 @@ class FortGame extends FlameGame with HasTimeScale {
 
   _DragPlacementState? _dragPlacement;
   int gold = startingGold;
+  final MergeSystem _mergeSystem = MergeSystem();
 
   @override
   Future<void> onLoad() async {
@@ -196,6 +201,28 @@ class FortGame extends FlameGame with HasTimeScale {
 
     dragPlacement.canvasPosition = canvasPosition.clone();
     final targetCell = _grid.cellAtCanvasPosition(canvasPosition);
+
+    // --- Merge path: drop onto an occupied cell with the same tower type ---
+    if (targetCell != null && targetCell.isOccupied) {
+      final existingTower = targetCell.occupyingTower;
+      if (existingTower != null && existingTower.type == entry.id) {
+        // Only attempt merge if we can afford the new tower (merge costs one unit)
+        if (gold >= entry.cost) {
+          final merged = _mergeSystem.performMerge(
+              existingTower, _createTowerForEntry(entry), _grid);
+          if (merged != null) {
+            targetCell.occupyingTower = merged;
+            gold -= entry.cost;
+            _syncGoldState();
+            // performMerge already plays merge audio and spawns particles
+          }
+        }
+      }
+      _clearDragPlacement();
+      return;
+    }
+
+    // --- Normal placement path ---
     final canPlace =
         targetCell != null &&
         !targetCell.isOccupied &&
@@ -223,10 +250,16 @@ class FortGame extends FlameGame with HasTimeScale {
     }
 
     final targetCell = _grid.cellAtCanvasPosition(canvasPosition);
-    final isValidDrop =
-        targetCell != null &&
+
+    // Valid if: empty cell with enough gold, OR occupied by same-type tower for merge
+    final isMergeTarget = targetCell != null &&
+        targetCell.isOccupied &&
+        targetCell.occupyingTower?.type == dragPlacement.entry.id &&
+        gold >= dragPlacement.entry.cost;
+    final isPlaceTarget = targetCell != null &&
         !targetCell.isOccupied &&
         gold >= dragPlacement.entry.cost;
+    final isValidDrop = isMergeTarget || isPlaceTarget;
 
     dragPlacement.isValidDrop = isValidDrop;
     _grid.setGhostCell(targetCell, isValid: isValidDrop);
@@ -236,17 +269,24 @@ class FortGame extends FlameGame with HasTimeScale {
     _grid.setOccupied(cell.row, cell.col, true);
 
     final towerSize = _grid.cellSize * 0.72;
-    final tower =
-        ArcherTower(
-            towerType: entry.id,
-            fillColor: entry.fillColor,
-            accentColor: entry.accentColor,
-          )
-          ..size = Vector2.all(towerSize)
-          ..position =
-              cell.position + Vector2.all((_grid.cellSize - towerSize) / 2);
+    final tower = _createTowerForEntry(entry)
+      ..size = Vector2.all(towerSize)
+      ..position =
+          cell.position + Vector2.all((_grid.cellSize - towerSize) / 2);
 
+    cell.occupyingTower = tower;
     _grid.add(tower);
+  }
+
+  BaseTower _createTowerForEntry(TowerPaletteEntry entry) {
+    switch (entry.type) {
+      case TowerType.cannon:
+        return CannonTower();
+      case TowerType.magic:
+        return MagicTower();
+      case TowerType.archer:
+        return ArcherTower();
+    }
   }
 
   void _clearDragPlacement() {

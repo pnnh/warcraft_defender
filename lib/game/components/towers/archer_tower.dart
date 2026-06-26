@@ -26,10 +26,14 @@ class ArcherTower extends BaseTower {
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-
+    final s = sprite;
+    if (s != null) {
+      s.render(canvas, size: size);
+      return;
+    }
+    // Geometry fallback
     final bodyPaint = Paint()..color = fillColor;
     final tipPaint = Paint()..color = accentColor;
-
     canvas.drawRRect(
       RRect.fromRectAndRadius(size.toRect(), const Radius.circular(8)),
       bodyPaint,
