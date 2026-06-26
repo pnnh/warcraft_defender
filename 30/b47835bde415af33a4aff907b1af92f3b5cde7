@@ -1,0 +1,31 @@
+lib/game/fort_game.dart
+  s_e0a7f5c41fca58::t_c586e72ade508e 208
+.beads/issues.jsonl
+  s_15d3d4058eab63::t_9c954bd0600fc1 23
+  s_e0a7f5c41fca58::t_c4cbd50b888dd5 16
+  s_e0a7f5c41fca58::t_668c0a624a7334 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "30b47835bde415af33a4aff907b1af92f3b5cde7",
+  "prompts": {},
+  "sessions": {
+    "s_15d3d4058eab63": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_01CSRmnET4DfBkL6zmrUPG3N",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_e0a7f5c41fca58": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a9b51b44-0a53-4db6-a45e-d331f119a3c4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
