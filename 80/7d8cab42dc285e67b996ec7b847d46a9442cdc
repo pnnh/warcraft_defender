@@ -1,0 +1,37 @@
+lib/game/fort_game.dart
+  s_e5092a3520599d::t_e98f21f3a9f844 12-13,22-23,34-43,55-77,79,91-112,207,255-266
+  s_e5092a3520599d::t_73d948a6ac89dd 159,161,163,238-246
+  s_e5092a3520599d::t_ea459d5b53004e 113
+lib/ui/screens/game_over_screen.dart
+  s_e5092a3520599d::t_e98f21f3a9f844 1-29,34-56,58-138,140-242
+  s_e5092a3520599d::t_73d948a6ac89dd 30-33,57,139
+lib/ui/screens/game_screen.dart
+  s_e5092a3520599d::t_e98f21f3a9f844 6-7,10,64-94
+.beads/issues.jsonl
+  s_e0a7f5c41fca58::t_2605ab3c717ccd 2,12,16,21,26
+  s_e5092a3520599d::t_01a3cab4700939 27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "807d8cab42dc285e67b996ec7b847d46a9442cdc",
+  "prompts": {},
+  "sessions": {
+    "s_e0a7f5c41fca58": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a9b51b44-0a53-4db6-a45e-d331f119a3c4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    },
+    "s_e5092a3520599d": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "toolu_bdrk_019uuA9NACKYsiVatCbRbRr4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
