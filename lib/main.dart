@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'data/persistence_service.dart';
 import 'ui/screens/game_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PersistenceService.instance.initialize();
   runApp(const WarcraftDefenderApp());
 }
 
