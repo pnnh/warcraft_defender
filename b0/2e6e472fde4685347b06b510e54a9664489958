@@ -1,0 +1,33 @@
+lib/game/components/units/archer_unit.dart
+  s_e0a7f5c41fca58::t_8265a823e239f5 19,39
+lib/game/components/ui/tower_palette.dart
+  s_e0a7f5c41fca58::t_6d7611ad1d23d0 50,52-53,57,59-60,64,67
+lib/game/components/units/sword_unit.dart
+  s_e0a7f5c41fca58::t_4a89641db1b4cb 18
+lib/game/components/units/mage_unit.dart
+  s_e0a7f5c41fca58::t_c0490ec38f76f8 19,37,39
+android/app/src/main/AndroidManifest.xml
+  s_e0a7f5c41fca58::t_287de84255df3d 14
+lib/game/components/towers/base_tower.dart
+  s_e0a7f5c41fca58::t_6c79001e1274a0 104-105
+lib/game/components/towers/archer_tower.dart
+  s_e0a7f5c41fca58::t_06e87ac708e593 49-50
+lib/game/components/towers/cannon_tower.dart
+  s_e0a7f5c41fca58::t_104408c9c62938 38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "b02e6e472fde4685347b06b510e54a9664489958",
+  "prompts": {},
+  "sessions": {
+    "s_e0a7f5c41fca58": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a9b51b44-0a53-4db6-a45e-d331f119a3c4",
+        "model": "unknown"
+      },
+      "human_author": "larry <xspanni@gmail.com>"
+    }
+  }
+}
